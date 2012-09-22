@@ -35,20 +35,29 @@ class HtmlOutputHandler extends BaseOutputHandler
    * Print array with response data as HTML list.
    *
    * \param $data Associative array with response data
+   * \param $level Level for list indention when printing
+   * nested arrays (default is 0)
    */
-  private function printArray($data)
+  private function printArray($data, $level = 0)
   {
-    echo '    <ul>' . "\n";
+    $spaces = '    ';
+    for ($i = 0; $i < $level; $i++)
+    {
+      $spaces .= '    ';
+    }
+
+    echo "\n" . $spaces . '<ul>' . "\n";
 
     // Iterate all field entries
     foreach ($data as $key => $value)
     {
-      echo '      <li><b>' . $key . '</b>: ';
+      echo $spaces . '  <li>' . "\n";
+      echo $spaces . '    <b>' . $key . '</b>: ';
 
       // Recursively process nested arrays
       if (is_array($value))
       {
-        $this->printArray($value);
+        $this->printArray($value, $level + 1);
       }
       // Process atomic values
       else
@@ -67,10 +76,10 @@ class HtmlOutputHandler extends BaseOutputHandler
         }
       }
 
-      echo '</li>' . "\n";
+      echo "\n" . $spaces . '  </li>' . "\n";
     }
 
-    echo '    </ul>' . "\n";
+    echo $spaces . '</ul>';
   }
 
   /**
@@ -87,7 +96,7 @@ class HtmlOutputHandler extends BaseOutputHandler
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   </head>
 
-  <body>\n
+  <body>
 EOT;
   }
 
@@ -97,6 +106,7 @@ EOT;
   private function printHTMLFooter()
   {
     echo <<<EOT
+
   </body>
 </html>
 EOT;

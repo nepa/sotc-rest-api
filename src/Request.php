@@ -9,20 +9,23 @@
  */
 class Request
 {
+  /** Offset when returning ressource and sub-ressource part of URL path */
+  private $pathOffset = 3;
+
   /** Request method (either GET, POST, PUT or DELETE) */
-  private $http_verb;
+  private $httpVerb;
 
   /** Request format (e.g. JSON or form data) */
   private $format;
 
   /** URL path of requested resource */
-  private $url_path;
+  private $urlPath;
 
   /** Query arguments from URL */
-  private $url_arguments;
+  private $urlArguments;
 
   /** Additional data from request body */
-  private $body_data;
+  private $bodyData;
 
   /**
    * Create a new RESTRequest object and initialize all its
@@ -31,18 +34,18 @@ class Request
   public function __construct()
   {
     // GET, POST, PUT or DELETE
-    $this->http_verb = $_SERVER['REQUEST_METHOD'];
+    $this->httpVerb = $_SERVER['REQUEST_METHOD'];
 
     // JSON, XML or whatever
     $this->format = 'json';
 
     // http://api.example.com/users/alice/foo -> users, alice and foo
-    $this->url_path = explode('/', $_SERVER['REQUEST_URI']);
+    $this->urlPath = explode('/', $_SERVER['REQUEST_URI']);
 
     // Parse URL arguments and parse request body
     try
     {
-      $this->parseArguments($this->url_arguments, $this->body_data);
+      $this->parseArguments($this->urlArguments, $this->bodyData);
     }
     catch (Exception $e)
     {
@@ -50,9 +53,9 @@ class Request
     }
 
     // User is requesting format other than JSON via URL
-    if (isset($this->url_arguments['format']))
+    if (isset($this->urlArguments['format']))
     {
-      $this->format = strtolower($this->url_arguments['format']);
+      $this->format = strtolower($this->urlArguments['format']);
     }
   }
 
@@ -60,12 +63,12 @@ class Request
    * Private helper method to extract URL arguments and parse
    * the body of POST/PUT requests.
    *
-   * \param &$url_arguments Reference to a field, that will
+   * \param &$urlArguments Reference to a field, that will
    * be used to return parsed URL arguments
-   * \param &$body_data Reference to a field, that will be
+   * \param &$bodyData Reference to a field, that will be
    * used to return parsed body data
    */
-  private function parseArguments(&$url_arguments, &$body_data)
+  private function parseArguments(&$urlArguments, &$bodyData)
   {
     // Extract GET arguments from URL
     $arguments = array();
@@ -74,7 +77,7 @@ class Request
     {
       parse_str($_SERVER['QUERY_STRING'], $arguments);
     }
-    $url_arguments = $arguments;
+    $urlArguments = $arguments;
 
     /****************************************************************/
 
@@ -102,7 +105,7 @@ class Request
         throw new Exception('Unsupported content type \'' . $content_type . '\' in request.');
         break;
     }
-    $body_data = $body;
+    $bodyData = $body;
   }
 
   /**
@@ -165,7 +168,7 @@ class Request
    */
   public function getHTTPVerb()
   {
-    return $this->http_verb;
+    return $this->httpVerb;
   }
 
   /**
@@ -194,12 +197,36 @@ class Request
     {
       $id = 1;
     }
-    else if ($id > count($this->url_path) - 1)
+    else if ($id > count($this->urlPath) - 1)
     {
-      $id = count($this->url_path) - 1;
+      $id = count($this->urlPath) - 1;
     }
 
-    return $this->url_path[$id];
+    return $this->urlPath[$id];
+  }
+
+  /**
+   * Get ressource part of the URL path. E.g. for
+   * http://api.example.com/customer/list this
+   * method will return 'customer'.
+   *
+   * \return Ressource part of URL path
+   */
+  public function getRessourcePath()
+  {
+    return $this->getURLPath($this->pathOffset);
+  }
+
+  /**
+   * Get sub-ressource part of the URL path. E.g.
+   * for http://api.example.com/customer/list this
+   * method will return 'list'.
+   *
+   * \return Sub-ressource part of URL path
+   */
+  public function getSubRessourcePath()
+  {
+    return $this->getURLPath($this->pathOffset + 1);
   }
 
   /**
@@ -211,7 +238,7 @@ class Request
    */
   public function getURLArguments()
   {
-    return $this->url_arguments;
+    return $this->urlArguments;
   }
 
   /**
@@ -223,7 +250,7 @@ class Request
    */
   public function getBodyData()
   {
-    return $this->body_data;
+    return $this->bodyData;
   }
 }
 

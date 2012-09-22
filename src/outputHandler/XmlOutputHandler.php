@@ -64,6 +64,10 @@ class XmlOutputHandler extends BaseOutputHandler
     // Iterate all field entries
     foreach ($data as $key => $value)
     {
+      // Numeric element names are not valid XML:
+      //   <0>value</0> -> <Item>value</Item>
+      $key = (is_numeric($key) ? 'Item' : $key);
+
       // Recursively process nested arrays
       if (is_array($value))
       {

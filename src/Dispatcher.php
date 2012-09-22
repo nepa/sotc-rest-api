@@ -46,8 +46,7 @@ class Dispatcher
   public static function handleRequest($request)
   {
     // Load controller for requested resource
-    $controllerName = ucfirst('NoiseLevel') . 'Controller';
-    // TODO: Readd: $controllerName = ucfirst($request->getURLPath(1)) . 'Controller';
+    $controllerName = ucfirst($request->getRessourcePath()) . 'Controller';
 
     if (class_exists($controllerName))
     {
