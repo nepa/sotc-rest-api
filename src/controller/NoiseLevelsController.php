@@ -2,6 +2,7 @@
 
 require_once(dirname(__FILE__) . '/BaseController.php');
 require_once('../../s1/MediaServer.php'); // TODO: Remove?
+require_once('../../s1/Authentication.php'); // TODO: Remove?
 
 /**
  * This is the noise levels controller, which can handle all
@@ -151,9 +152,59 @@ class NoiseLevelsController extends BaseController
    */
   public function postAction($request)
   {
-    echo 'POST action of noise level controller was called.' . "\n\n";
+    $result = array();
 
-    // TODO: Implement method
+    // Report noise level
+    if ($request->getSubRessourcePath() == 'report')
+    {
+      $result = $this->reportNoiseLevel($request);
+    }
+    else
+    {
+      $result = array(
+                  'Statuscode' => 'Error',
+                  'Message' => 'Invalid sub-ressource requested for noise levels.');
+    }
+
+    return $result;
+  }
+
+  /**
+   * Validate the client's API key, store reported noise level
+   * value in the database and return a success message.
+   *
+   * \param $request REST request from client
+   *
+   * \return Array with response data
+   */
+  private function reportNoiseLevel($request)
+  {
+    $result = array();
+    $bodyData = $request->getBodyData();
+
+    // Validate client credentials
+    if (Authentication::validate($bodyData['AppName'], $bodyData['ApiKey']))
+    {
+      $arguments = $request->getURLArguments();
+
+      $result = MediaServer::handleReportRequest(
+                  $arguments['latitude'],
+                  $arguments['longitude'],
+                  $bodyData['Time'],
+                  $arguments['zipCode'],
+                  $bodyData['NoiseLevel'],
+                  $bodyData['NoiseLevelOrg'],
+                  $bodyData['ReportedBy'],
+                  $bodyData['InPocket']);
+    }
+    else
+    {
+      $result = array(
+                  'Statuscode' => 'Error',
+                  'Message' => 'Invalid or no auth data provided. Please check your API key.');
+    }
+
+    return $result;
   }
 }
 
