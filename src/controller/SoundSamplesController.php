@@ -77,9 +77,82 @@ class SoundSamplesController extends BaseController
     return $result;
   }
 
-  // TODO: Implement method and add comment
+  /**
+   * This method can handle POST requests to the sound sample resource.
+   * It will save single sound samples, that have been uploaded by the
+   * user.
+   *
+   * \param $request REST request from client
+   *
+   * \return Array with response data
+   */
   public function postAction($request)
   {
+    $result = array();
+
+    // Upload sound sample
+    if ($request->getSubRessourcePath() == 'upload')
+    {
+      $result = $this->uploadSoundSample($request);
+    }
+    else
+    {
+      $result = array(
+                  'Statuscode' => 'Error',
+                  'Message' => 'Invalid sub-ressource requested for noise levels.');
+    }
+
+    return $result;
+  }
+
+  /**
+   * Validate the client's API key, save uploaded sound sample on
+   * disk and return a success message.
+   *
+   * \param $request REST request from client
+   *
+   * \return Array with response data
+   */
+  private function uploadSoundSample($request)
+  {
+    $result = array();
+    $bodyData = $request->getBodyData();
+    $arguments = $request->getURLArguments();
+
+    // Validate client credentials
+    if (isset($bodyData['AppName']) && isset($bodyData['ApiKey']) &&
+        Authentication::validate($bodyData['AppName'], $bodyData['ApiKey']))
+    {
+      // Upload sound sample
+      if (isset($arguments['latitude']) && isset($arguments['longitude']) && isset($bodyData['Title']) &&
+          isset($bodyData['Time']) && isset($bodyData['Description']) && isset($bodyData['PayloadType']) &&
+          isset($bodyData['Payload']) && isset($bodyData['ReportedBy']))
+      {
+        $result = MediaServer::handleUploadRequest(
+                    $arguments['latitude'],
+                    $arguments['longitude'],
+                    $bodyData['Title'],
+                    $bodyData['Time'],
+                    $bodyData['Description'],
+                    $bodyData['PayloadType'],
+                    $bodyData['Payload'],
+                    $bodyData['ReportedBy']);
+      }
+      else
+      {
+        $result = array(
+                    'Statuscode' => 'Error',
+                    'Message' => 'Invalid or incomplete request. Check URL arguments and body data.');
+      }
+    }
+    else
+    {
+      $result = array(
+                  'Statuscode' => 'Error',
+                  'Message' => 'Invalid or no auth data provided. Check your API key.');
+    }
+
+    return $result;
   }
 }
 

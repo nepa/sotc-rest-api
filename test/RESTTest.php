@@ -119,9 +119,41 @@ EOT;
     $this->assertEqual($response['ResultCount'], count($response['SampleData']), 'Number of sound samples must match expected result count.');
   }
 
-  // TODO: Test POST reportDeviceInfo(osVersion, apiLevel, deviceType, reportedBy)
+  /**
+   * Test uploading of sound samples.
+   */
+  public function testSampleUpload()
+  {
+    $lat = 51.58;
+    $long = 7.6;
+    $title = 'Some title.';
+    $timestamp = time();
+    $desc = 'Some description.';
+    $payloadType = 'mp3';
+    $payload = 'xxx';
+    $reportedBy = 'Foobar';
+    $appName = 'SotC Android App';
+    $apiKey = '62adf8ee76d4b497dd4df5de69ca9f83';
+    $query = 'soundSamples/upload/?latitude=' . $lat . '&longitude=' . $long;
 
-  // TODO: Test POST uploadSample(lat, long, title, timestamp, desc, payloadType, payload, reportedBy)
+    $body = <<<EOT
+{
+  "Title": "$title",
+  "Time": "$time",
+  "Description": "$desc",
+  "PayloadType": "$payloadType",
+  "Payload": "$payload",
+  "ReportedBy": "$reportedBy",
+  "AppName": "$appName",
+  "ApiKey": "$apiKey"
+}
+EOT;
+
+    $response = self::doPOSTRequest($query, $body);
+    $this->assertTrue(!empty($response), 'REST response must not be empty.');
+
+    $this->assertEqual($response['Statuscode'], 'OK', 'Status code must be \'OK\'.');
+  }
 
   /**
    * Private helper method to send GET requests via REST.
