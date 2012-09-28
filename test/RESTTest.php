@@ -1,6 +1,6 @@
 <?php
 
-require_once('./simpletest/autorun.php');
+require_once(dirname(__FILE__) . '/simpletest/autorun.php');
 
 /**
  * Unit tests for the Sound of the City REST API.
@@ -86,10 +86,10 @@ class RESTTest extends UnitTestCase
     $body = <<<EOT
 {
   "Time": "$time",
-  "NoiseLevel": "$noiseLevel",
-  "NoiseLevelOrg": "$noiseLevelOrg",
+  "NoiseLevel": $noiseLevel,
+  "NoiseLevelOrg": $noiseLevelOrg,
   "ReportedBy": "$reportedBy",
-  "InPocket": "$inPocket",
+  "InPocket": $inPocket,
   "AppName": "$appName",
   "ApiKey": "$apiKey"
 }
@@ -201,6 +201,7 @@ EOT;
     if ($debug)
     {
       echo '<h3>Request: <i>POST ' . self::$service_url . $resource . '</i></h3>';
+      echo '<pre>' . $body . '</pre>';
       echo '<pre>';
       print_r(json_decode($result, true));
       echo '</pre>';

@@ -1,6 +1,7 @@
 <?php
 
 require_once(dirname(__FILE__) . '/BaseController.php');
+require_once(dirname(dirname(__FILE__)) . '/Utility.php');
 require_once('../../s1/MediaServer.php'); // TODO: Remove?
 require_once('../../s1/Authentication.php'); // TODO: Remove?
 
@@ -106,39 +107,16 @@ class NoiseLevelsController extends BaseController
                   $arguments['range']);
 
       // Capitalize first letter of all array keys
-      $this->ucfirstKeys($result);
+      Utility::ucfirstKeys($result);
+    }
+    else
+    {
+      $result = array(
+                  'Statuscode' => 'Error',
+                  'Message' => 'Invalid or no arguments in REST request.');
     }
 
     return $result;
-  }
-
-  /**
-   * Private helper method to capitalize the first letter
-   * of all array keys. The function will also change the
-   * keys of all nested arrays.
-   *
-   * \param &$data Reference to array for conversion
-   */
-  private function ucfirstKeys(&$data)
-  {
-    foreach ($data as $key => $value)
-    {
-      // Convert key
-      $newKey = ucfirst($key);
-
-      // Change key if needed
-      if ($newKey != $key)
-      {
-        unset($data[$key]);
-        $data[$newKey] = $value;
-      }
-
-      // Handle nested arrays
-      if (is_array($value))
-      {
-        $this->ucfirstKeys($data[$key]);
-      }
-    }
   }
 
   /**
@@ -181,27 +159,39 @@ class NoiseLevelsController extends BaseController
   {
     $result = array();
     $bodyData = $request->getBodyData();
+    $arguments = $request->getURLArguments();
 
     // Validate client credentials
-    if (Authentication::validate($bodyData['AppName'], $bodyData['ApiKey']))
+    if (isset($bodyData['AppName']) && isset($bodyData['ApiKey']) &&
+        Authentication::validate($bodyData['AppName'], $bodyData['ApiKey']))
     {
-      $arguments = $request->getURLArguments();
-
-      $result = MediaServer::handleReportRequest(
-                  $arguments['latitude'],
-                  $arguments['longitude'],
-                  $bodyData['Time'],
-                  $arguments['zipCode'],
-                  $bodyData['NoiseLevel'],
-                  $bodyData['NoiseLevelOrg'],
-                  $bodyData['ReportedBy'],
-                  $bodyData['InPocket']);
+      // Report noise level
+      if (isset($arguments['latitude']) && isset($arguments['longitude']) && isset($bodyData['Time']) &&
+          isset($arguments['zipCode']) && isset($bodyData['NoiseLevel']) && isset($bodyData['NoiseLevelOrg']) &&
+          isset($bodyData['ReportedBy']) && isset($bodyData['InPocket']))
+      {
+        $result = MediaServer::handleReportRequest(
+                    $arguments['latitude'],
+                    $arguments['longitude'],
+                    $bodyData['Time'],
+                    $arguments['zipCode'],
+                    $bodyData['NoiseLevel'],
+                    $bodyData['NoiseLevelOrg'],
+                    $bodyData['ReportedBy'],
+                    $bodyData['InPocket']);
+      }
+      else
+      {
+        $result = array(
+                    'Statuscode' => 'Error',
+                    'Message' => 'Invalid or incomplete request. Check URL arguments and body data.');
+      }
     }
     else
     {
       $result = array(
                   'Statuscode' => 'Error',
-                  'Message' => 'Invalid or no auth data provided. Please check your API key.');
+                  'Message' => 'Invalid or no auth data provided. Check your API key.');
     }
 
     return $result;
