@@ -120,6 +120,36 @@ EOT;
   }
 
   /**
+   * Test reporting of device information.
+   */
+  public function testReportDeviceInfo()
+  {
+    $osVersion = '1.0.0';
+    $apiLevel = '3';
+    $deviceType = 'Some device';
+    $reportedBy = 'Foobar';
+    $appName = 'SotC Android App';
+    $apiKey = '62adf8ee76d4b497dd4df5de69ca9f83';
+    $query = 'deviceInfos/report/';
+
+    $body = <<<EOT
+{
+  "OSVersion": "$osVersion",
+  "APILevel": "$apiLevel",
+  "DeviceType": "$deviceType",
+  "ReportedBy": "$reportedBy",
+  "AppName": "$appName",
+  "ApiKey": "$apiKey"
+}
+EOT;
+
+    $response = self::doPOSTRequest($query, $body);
+    $this->assertTrue(!empty($response), 'REST response must not be empty.');
+
+    $this->assertEqual($response['Statuscode'], 'OK', 'Status code must be \'OK\'.');
+  }
+
+  /**
    * Test uploading of sound samples.
    */
   public function testSampleUpload()

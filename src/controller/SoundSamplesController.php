@@ -99,7 +99,7 @@ class SoundSamplesController extends BaseController
     {
       $result = array(
                   'Statuscode' => 'Error',
-                  'Message' => 'Invalid sub-ressource requested for noise levels.');
+                  'Message' => 'Invalid sub-ressource requested for sound samples.');
     }
 
     return $result;
