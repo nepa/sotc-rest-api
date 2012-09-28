@@ -169,7 +169,7 @@ EOT;
     $body = <<<EOT
 {
   "Title": "$title",
-  "Time": "$time",
+  "Time": "$timestamp",
   "Description": "$desc",
   "PayloadType": "$payloadType",
   "Payload": "$payload",
