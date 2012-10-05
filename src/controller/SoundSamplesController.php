@@ -2,8 +2,8 @@
 
 require_once(dirname(__FILE__) . '/BaseController.php');
 require_once(dirname(dirname(__FILE__)) . '/Utility.php');
-require_once('../../s1/MediaServer.php'); // TODO: Remove?
-require_once('../../s1/Authentication.php'); // TODO: Remove?
+require_once(BACKEND_LOCATION . '/MediaServer.php');
+require_once(BACKEND_LOCATION . '/Authentication.php');
 
 /**
  * This is the sound sample controller, which can handle all

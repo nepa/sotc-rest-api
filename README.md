@@ -56,7 +56,7 @@ Next, the dispatcher will pass the result to an **output handler**. Various impl
 
 To install the SotC REST API, copy all files from the `src` folder to your webserver. You do **not** need to move the files to the same directory where Server-One is located. We recommend to use a folder structure like `https://api.example.com/rest/v1/`, if you want to host multiple versions of the API at the same time.
 
-Next, open the `.htaccess` file and modify the `RewriteBase` entry such that it points to your installation directory. The same value must be applied to the PHP constant `BASE_DIRECTORY` at the very beginning of the `index.php` file. Both options tell the webserver and PHP processor where the SotC REST API is located.
+Next, open the `.htaccess` file and modify the `RewriteBase` entry such, that it points to your installation directory. Then edit `index.php` and set the PHP constant `BACKEND_LOCATION` to the path where your installation of the Server-One service backend resides. The path must be relative to your API location and must **not** have a trailing slash.
 
 ### Authentication
 
