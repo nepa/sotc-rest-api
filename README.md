@@ -88,6 +88,13 @@ The HTTP header of a REST request must always set the content type to JSON, othe
 
 A more comprehensive documentation for end-users will be available on the [Sound of the City](http://citysound.itm.uni-luebeck.de) website soon.
 
+## History
+
+  * **Version 1:**
+    * Basic implementation of dispatcher, resource controllers and output handlers
+    * REST interface is compatible to Server-One's initial SOAP interface
+    * Unit tests for all REST resources
+
 ## Author
 
 The SotC REST API was written by: **Sascha Seidel**, NetPanther@gmx.net

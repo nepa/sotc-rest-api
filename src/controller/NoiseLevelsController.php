@@ -167,9 +167,15 @@ class NoiseLevelsController extends BaseController
     {
       // Report noise level
       if (isset($arguments['latitude']) && isset($arguments['longitude']) && isset($bodyData['Time']) &&
-          isset($arguments['zipCode']) && isset($bodyData['NoiseLevel']) && isset($bodyData['NoiseLevelOrg']) &&
-          isset($bodyData['ReportedBy']) && isset($bodyData['InPocket']))
+          isset($bodyData['NoiseLevel']) && isset($bodyData['NoiseLevelOrg']) && isset($bodyData['ReportedBy']) &&
+          isset($bodyData['InPocket']))
       {
+        // Prevent PHP notice because of undefined index
+        if (!isset($arguments['zipCode']))
+        {
+          $arguments['zipCode'] = null;
+        }
+
         $result = MediaServer::handleReportRequest(
                     $arguments['latitude'],
                     $arguments['longitude'],
