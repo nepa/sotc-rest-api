@@ -1,0 +1,1126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+  <!ENTITY BASE_URL "https://citysound.itm.uni-luebeck.de/rest/">
+  <!ENTITY DOWNLOAD_URL "http://citysound.itm.uni-luebeck.de/s1/download.php?sid=">
+]>
+
+<article>
+  <articleinfo>
+    <title>Sound of the City REST API</title>
+
+    <pubdate>Documentation for API v1. Last update on <?dbtimestamp format="Y-m-d"?>.</pubdate>
+
+    <author>
+      <honorific>Dipl.-Inform. (FH)</honorific>
+      <firstname>Sascha</firstname>
+      <surname>Seidel</surname>
+    </author>
+
+    <copyright>
+      <year>2011</year>
+      <year>2012</year>
+      <holder>Institute of Telematics</holder>
+    </copyright>
+
+    <legalnotice>
+      <para>This work is licensed under the Creative Commons Attribution 3.0 Unported License.</para>
+    </legalnotice>
+  </articleinfo>
+
+  <note>
+    <para>This document is available in English only. However, you can try to <ulink url="http://translate.google.com/translate?u=http%3A%2F%2Fcitysound.itm.uni-luebeck.de%2Fdocumentation.html">translate the page</ulink> with Google Translate.</para>
+  </note>
+
+  <sect1 id="introduction">
+    <title>Introduction</title>
+
+    <para>
+      The <emphasis>Sound of the City</emphasis> (SotC) project maintains a public database of geo-tagged noises and sound samples. With our <ulink url="http://en.wikipedia.org/wiki/Representational_state_transfer">REST</ulink> API we are striving to achieve better access to the available data. We want other developers to participate in our project and build their own services on top of our media backend. The document at hand describes the usage of our REST interface and is intended to be a useful guide to cosume the data we serve.
+    </para>
+
+    <para>
+      We offer multiple REST resources and a variety of output formats. However, the interface is not feature-complete and may change once in a while. Please check the API version number and timestamp at the top of this page, if you encounter any problems with your code or our service.
+    </para>
+
+    <para>
+      If you have any difficulties using SotC as a developer or want to suggest new features, feel free to <ulink url="contact.html">contact us</ulink>. When writing the API documentation, we attempted to be as precise as possible. However, if anything remains unclear, we are open to recieve your feedback via email.
+    </para>
+  </sect1>
+
+  <sect1 id="resources">
+    <title>Resources</title>
+
+    <para>
+      Multiple REST resources can be accessed through the public SotC API. You can find a brief description of each resource below.
+    </para>
+
+    <para>
+      <variablelist>
+        <varlistentry>
+          <term>noiseLevels</term>
+          <listitem>
+            <para>
+              This REST resource will handle all requests related to noise levels. For example, you can get the average noise level by geo coordinates or zip code, list nearby values or report single noise levels.
+            </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>soundSamples</term>
+          <listitem>
+            <para>
+              This REST resource will handle all requests related to sound samples. You can use it to list nearby sound samples for a dedicated geo location or to upload your own audio recordings.
+            </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>deviceInfos</term>
+          <listitem>
+            <para>
+              This REST resource will handle all requests related to device information. Admittedly, this resource is not of great value for most users. It can be used to report information about mobile clients and is mainly intended for internal purposes (i.e. to improve compatibility).
+            </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </para>
+  </sect1>
+
+  <sect1 id="apiKeys">
+    <title>Writing Access</title>
+
+    <para>
+      You can query most REST resources without any registration. However, to prevent malicious use of the SotC API, you will need an API key to report noise levels, upload sound samples or report device information. Write access is not possible, unless your application was authenticated via its <emphasis>application name</emphasis> and <emphasis>API key</emphasis> before.
+    </para>
+
+    <para>
+      Currently the use of our service is free of charge. As a developer, you can get your personal API key simply by <ulink url="contact.html">emailing us</ulink>. Please tell us a little about your project, so that we can decide whether we can provide you with authentication data or not. We reserve the right to reject issuing an API key, if we think the applicant is not trustworthy. But just give it a try, we don't bite. :-)
+    </para>
+
+    <para>
+      Client credentials must be passed in the body of your POST request:
+    </para>
+
+    <caption><para>Show sample POST body with authentication data.</para></caption>
+    <programlisting><![CDATA[
+{
+  "Time": "1349964015",
+  "NoiseLevel": 70,
+  "NoiseLevelOrg": 0,
+  "ReportedBy": "",
+  "InPocket": 0,]]>
+  <emphasis role="bold">"AppName": "SotC Android App",
+  "ApiKey": "62adf8ee76d4b497dd4df5de69ca9f83"</emphasis>
+<![CDATA[}]]></programlisting>
+  </sect1>
+
+  <sect1 id="formats">
+    <title>Message Formats</title>
+
+    <para>
+      Input messages, i.e. the payload of POST requests, must always be encoded using JSON. On the output side, however, developers can choose between JSON, XML and HTML. This way we want to increase the ease of use and give you more flexibility on the client-side. To specify a response format other then JSON, please use the <literal>format</literal> URL argument.
+    </para>
+
+    <para>
+      The default output format is JSON. If you do not specify any format explicitly, JSON will be used automatically. Despite that, you can also set the <literal>format</literal> parameter to <literal>json</literal> manually:
+
+      <emphasis role="rest-url">&BASE_URL;noiseLevels/average/?<emphasis role="bold">format=json</emphasis>&amp;zipCode=23562</emphasis>
+    </para>
+
+    <para>
+      For XML-encoded response messages, set the <literal>format</literal> URL parameter to <literal>xml</literal>:
+
+      <emphasis role="rest-url">&BASE_URL;noiseLevels/average/?<emphasis role="bold">format=xml</emphasis>&amp;zipCode=23562</emphasis>
+    </para>
+
+    <para>
+      Another possible output format is HTML. The response data will be rendered as an unordered list, if you set the <literal>format</literal> value to <literal>html</literal>:
+
+      <emphasis role="rest-url">&BASE_URL;noiseLevels/average/?<emphasis role="bold">format=html</emphasis>&amp;zipCode=23562</emphasis>
+
+      The intended use of this option is debugging. In our opinion, the HTML output is not suitable to process the data any further.
+    </para>
+  </sect1>
+
+  <sect1 id="gettingStarted">
+    <title>Getting Started</title>
+
+    <para>
+      REST is an architectural style based on the HTTP network protocol. The SotC API supports two different HTTP verbs, namely GET for reading requests and POST for writing requests. In the example below, you can see one of the simplest queries possible. The client is requesting the average noise level for the zip code area <literal>23562</literal>. Most of the HTTP headers are optional, the only mandatory one is <literal>Content-Type</literal>. It must always be set to <literal>application/json</literal>, because otherwise the service will raise an exception.
+    </para>
+
+    <caption><para>Show HTTP header of sample GET request.</para></caption>
+    <programlisting><![CDATA[
+GET /rest/noiseLevels/average/?zipCode=23562 HTTP/1.1
+User-Agent: Foobar Client
+Host: example.org
+Accept: text/html, application/xml, application/json]]>
+<emphasis role="bold">Content-Type: application/json</emphasis></programlisting>
+
+    <para>
+      As a result of this request, you will get a REST response with JSON code in its body. The payload depends on your individual query, of course.
+    </para>
+
+    <caption><para>Show JSON payload of REST response.</para></caption>
+    <programlisting><![CDATA[
+{
+  "Statuscode": "OK",
+  "Message": "Average sound level successfully queried by zip code.",
+  "AverageNoiseLevel": 58
+}]]></programlisting>
+  </sect1>
+
+  <sect1 id="noiseLevels">
+    <title>Noise Levels Resource</title>
+
+    <para>
+      This resource handles all requests related to noise levels.
+    </para>
+
+    <sect2 id="averageGeo">
+      <title>Get average noise level by geo coordinates</title>
+
+      <para>
+        <emphasis role="rest-url">&BASE_URL;<emphasis role="bold">noiseLevels/average/?latitude=&lt;1&gt;&amp;longitude=&lt;2&gt;&amp;range=&lt;3&gt;</emphasis></emphasis>
+
+        <sect3>
+          <title>Description</title>
+
+          <para>
+            Get the average noise level of nearby area. The target location is specified by geo coordinates (latitude/longitude).
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Arguments</title>
+
+          <para>
+            <variablelist>
+              <varlistentry>
+                <term>latitude</term>
+                <listitem>
+                  <para>
+                    Latitude value of geo location (e.g. <literal>53.834208</literal>). Decimal value in the range of +/- 90.0°. Geo locations are processed as <ulink url="http://en.wikipedia.org/wiki/Decimal_degrees">decimal degrees</ulink>.
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>longitude</term>
+                <listitem>
+                  <para>
+                    Longitude value of geo location (e.g. <literal>10.700136</literal>). Decimal value in the range of +/- 180.0°. Geo locations are processed as <ulink url="http://en.wikipedia.org/wiki/Decimal_degrees">decimal degrees</ulink>.
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>range</term>
+                <listitem>
+                  <para>
+                    Lateral length of a square, which is centered on the geo location (e.g. <literal>3.0</literal>). Decimal value. Unit is km. 0.01 degree is equal to 1.11 km, so 1 km is about 0.009 degree.
+                  </para>
+                </listitem>
+              </varlistentry>
+            </variablelist>
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Body Payload</title>
+
+          <para>
+            This is a GET request without body payload.
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Return Message</title>
+
+          <para>
+            The method will return a status code (e.g. <literal>OK</literal> or <literal>Error</literal>), a human-readable message and the average noise level for the area surrounding the desired geo coordinates. The noise level is an integer value. Its unit is dB.
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Examples</title>
+
+          <caption><para>Show JSON payload of REST response.</para></caption>
+          <programlisting><![CDATA[
+{
+  "Statuscode": "OK",
+  "Message": "Average sound level queried successfully.",
+  "AverageNoiseLevel": 59
+}]]></programlisting>
+
+          <caption><para>Show XML payload of REST response.</para></caption>
+          <programlisting><![CDATA[
+<Response>
+  <Statuscode>OK</Statuscode>
+  <Message>Average sound level queried successfully.</Message>
+  <AverageNoiseLevel>59</AverageNoiseLevel>
+</Response>]]></programlisting>
+        </sect3>
+      </para>
+    </sect2>
+
+    <sect2 id="averageZip">
+      <title>Get average noise level by zip code</title>
+
+      <para>
+        <emphasis role="rest-url">&BASE_URL;<emphasis role="bold">noiseLevels/average/?zipCode=&lt;1&gt;</emphasis></emphasis>
+
+        <warning>
+          <para>This method is deprecated. Please do not query the average noise level by zip code. Use <ulink url="documentation.html#averageGeo">geo coordinates</ulink> instead. Noise levels returned by postcode are very likely to be inaccurate and may be based on incomplete data.</para>
+        </warning>
+
+        <sect3>
+          <title>Description</title>
+
+          <para>
+            Get average noise level of postcode area.
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Arguments</title>
+
+          <para>
+            <variablelist>
+              <varlistentry>
+                <term>zipCode</term>
+                <listitem>
+                  <para>
+                    Zip code of target area (e.g. <literal>23562</literal>). String value with a maximum length of ten characters.
+                  </para>
+                </listitem>
+              </varlistentry>
+            </variablelist>
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Body Payload</title>
+
+          <para>
+            This is a GET request without body payload.
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Return Message</title>
+
+          <para>
+            The method will return a status code (e.g. <literal>OK</literal> or <literal>Error</literal>), a human-readable message and the average noise level for the desired zip code area. The noise level is an integer value. Its unit is dB.
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Examples</title>
+
+          <caption><para>Show JSON payload of REST response.</para></caption>
+          <programlisting><![CDATA[
+{
+  "Statuscode": "OK",
+  "Message": "Average sound level successfully queried by zip code.",
+  "AverageNoiseLevel": 75
+}]]></programlisting>
+
+          <caption><para>Show XML payload of REST response.</para></caption>
+          <programlisting><![CDATA[
+<Response>
+  <Statuscode>OK</Statuscode>
+  <Message>Average sound level successfully queried by zip code.</Message>
+  <AverageNoiseLevel>75</AverageNoiseLevel>
+</Response>]]></programlisting>
+        </sect3>
+      </para>
+    </sect2>
+
+    <sect2 id="listLevels">
+      <title>List nearby noise levels</title>
+
+      <para>
+        <emphasis role="rest-url">&BASE_URL;<emphasis role="bold">noiseLevels/list/?latitude=&lt;1&gt;&amp;longitude=&lt;2&gt;&amp;range=&lt;3&gt;</emphasis></emphasis>
+
+        <sect3>
+          <title>Description</title>
+
+          <para>
+            Get a list of noise levels that were recorded in the nearby area.
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Arguments</title>
+
+          <para>
+            <variablelist>
+              <varlistentry>
+                <term>latitude</term>
+                <listitem>
+                  <para>
+                    Latitude value of geo location (e.g. <literal>53.834208</literal>). Decimal value in the range of +/- 90.0°. Geo locations are processed as <ulink url="http://en.wikipedia.org/wiki/Decimal_degrees">decimal degrees</ulink>.
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>longitude</term>
+                <listitem>
+                  <para>
+                    Longitude value of geo location (e.g. <literal>10.700136</literal>). Decimal value in the range of +/- 180.0°. Geo locations are processed as <ulink url="http://en.wikipedia.org/wiki/Decimal_degrees">decimal degrees</ulink>.
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>range</term>
+                <listitem>
+                  <para>
+                    Lateral length of a square, which is centered on the geo location (e.g. <literal>3.0</literal>). Decimal value. Unit is km. 0.01 degree is equal to 1.11 km, so 1 km is about 0.009 degree.
+                  </para>
+                </listitem>
+              </varlistentry>
+            </variablelist>
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Body Payload</title>
+
+          <para>
+            This is a GET request without body payload.
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Return Message</title>
+
+          <para>
+            The method will return a status code (e.g. <literal>OK</literal> or <literal>Error</literal>), a human-readable message, a list of noise levels (if any) and a result count (i.e. number of results returned).
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Examples</title>
+
+          <caption><para>Show JSON payload of REST response.</para></caption>
+          <programlisting><![CDATA[
+{
+  "Statuscode": "OK",
+  "Message": "Sound levels queried successfully.",
+  "NoiseLevels": {
+    "0": {
+      "Latitude": "53.834208",
+      "Longitude": "10.700136",
+      "Timestamp": "1349964015",
+      "ZipCode": "23562",
+      "NoiseLevel": "59"
+    },
+    "1": {
+      "Latitude": "53.834208",
+      "Longitude": "10.700136",
+      "Timestamp": "1349469039",
+      "ZipCode": "23562",
+      "NoiseLevel": "75"
+    },
+    "2": {
+      "Latitude": "53.834208",
+      "Longitude": "10.700136",
+      "Timestamp": "1349468693",
+      "ZipCode": "23562",
+      "NoiseLevel": "71"
+    }
+  },
+  "ResultCount": 3
+}]]></programlisting>
+
+          <caption><para>Show XML payload of REST response.</para></caption>
+          <programlisting><![CDATA[
+<Response>
+  <Statuscode>OK</Statuscode>
+  <Message>Sound levels queried successfully.</Message>
+  <NoiseLevels>
+    <Item>
+      <Latitude>51.58000</Latitude>
+      <Longitude>7.60000</Longitude>
+      <Timestamp>1349964015</Timestamp>
+      <ZipCode>23562</ZipCode>
+      <NoiseLevel>59</NoiseLevel>
+    </Item>
+    <Item>
+      <Latitude>51.58000</Latitude>
+      <Longitude>7.60000</Longitude>
+      <Timestamp>1349469039</Timestamp>
+      <ZipCode>23562</ZipCode>
+      <NoiseLevel>75</NoiseLevel>
+    </Item>
+    <Item>
+      <Latitude>51.58000</Latitude>
+      <Longitude>7.60000</Longitude>
+      <Timestamp>1349468693</Timestamp>
+      <ZipCode>23562</ZipCode>
+      <NoiseLevel>71</NoiseLevel>
+    </Item>
+  </NoiseLevels>
+  <ResultCount>3</ResultCount>
+</Response>]]></programlisting>
+        </sect3>
+      </para>
+    </sect2>
+
+    <sect2 id="reportLevel">
+      <title>Report noise level</title>
+
+      <para>
+        <emphasis role="rest-url">&BASE_URL;<emphasis role="bold">noiseLevels/report/?latitude=&lt;1&gt;&amp;longitude=&lt;2&gt;&amp;zipCode=&lt;3&gt;</emphasis></emphasis>
+
+        <sect3>
+          <title>Description</title>
+
+          <para>
+            Report noise level for the given location. The target area is specified by geo coordinates (latitude/longitude). The zip code parameter is optional.
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Arguments</title>
+
+          <para>
+            <variablelist>
+              <varlistentry>
+                <term>latitude</term>
+                <listitem>
+                  <para>
+                    Latitude value of geo location (e.g. <literal>53.834208</literal>). Decimal value in the range of +/- 90.0°. Geo locations are processed as <ulink url="http://en.wikipedia.org/wiki/Decimal_degrees">decimal degrees</ulink>.
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>longitude</term>
+                <listitem>
+                  <para>
+                    Longitude value of geo location (e.g. <literal>10.700136</literal>). Decimal value in the range of +/- 180.0°. Geo locations are processed as <ulink url="http://en.wikipedia.org/wiki/Decimal_degrees">decimal degrees</ulink>.
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>zipCode</term>
+                <listitem>
+                  <para>
+                    Zip code of target area (e.g. <literal>23562</literal>). String value with a maximum length of ten characters. <emphasis>This parameter is optional.</emphasis>
+                  </para>
+                </listitem>
+              </varlistentry>
+            </variablelist>
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Body Payload</title>
+
+          <para>
+            This is a POST request with body payload. If you want to report noise levels, please use your <ulink url="documentation.html#apiKeys">API key for authentification</ulink>.
+          </para>
+
+          <para>
+            <variablelist>
+              <varlistentry>
+                <term>Time</term>
+                <listitem>
+                  <para>
+                    Time of the reporting. <ulink url="http://en.wikipedia.org/wiki/Unix_time">UNIX timestamp</ulink> as a string value with a maximum length of 80 characters.
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>NoiseLevel</term>
+                <listitem>
+                  <para>
+                    Reported noise level value. Integer number with dB as its unit.
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>NoiseLevelOrg</term>
+                <listitem>
+                  <para>
+                    Reported noise level value. Integer number with dB as its unit. <emphasis role="issue">Pass <literal>0</literal>, unless you know how this argument is used internally.</emphasis>
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>ReportedBy</term>
+                <listitem>
+                  <para>
+                    Identifier for client that reported the noise level. String value with a maximum length of 80 characters. <emphasis role="issue">Pass an empty string, unless you know how this argument is used internally.</emphasis>
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>InPocket</term>
+                <listitem>
+                  <para>
+                    Flag to indicate that the user's device was in his or hers pocket while recording. This may indicate that the reported value is inaccurate. Integer number to represent a boolean value (<literal>0</literal> for false and <literal>1</literal> for true). <emphasis role="issue">Pass zero, unless you know how this argument is used internally.</emphasis>
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>AppName</term>
+                <listitem>
+                  <para>
+                    Identifier for application that reports the noise level. String value with a maximum length of 80 characters. The application name is case sensitive. You need to <ulink url="documentation.html#apiKeys">apply for an API key</ulink>, before you can issue POST requests.
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>ApiKey</term>
+                <listitem>
+                  <para>
+                    API key that matches your application's name. String value with a maximum length of 32 characters. You need to <ulink url="documentation.html#apiKeys">apply for an API key</ulink>, before you can issue POST requests.
+                  </para>
+                </listitem>
+              </varlistentry>
+            </variablelist>
+          </para>
+
+          <para>
+            In the following code box you can see a sample POST request for noise level reporting:
+          </para>
+
+          <caption><para>Show JSON payload of REST request.</para></caption>
+          <programlisting><![CDATA[
+{
+  "Time": "1350082846",
+  "NoiseLevel": 70,
+  "NoiseLevelOrg": 0,
+  "ReportedBy": "",
+  "InPocket": 0,
+  "AppName": "SotC Android App",
+  "ApiKey": "62adf8ee76d4b497dd4df5de69ca9f83"
+}]]></programlisting>
+        </sect3>
+
+        <sect3>
+          <title>Return Message</title>
+
+          <para>
+            The method will return a status code (e.g. <literal>OK</literal> or <literal>Error</literal>) and a human-readable message.
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Examples</title>
+
+          <caption><para>Show JSON payload of REST response.</para></caption>
+          <programlisting><![CDATA[
+{
+  "Statuscode": "OK",
+  "Message": "Noise level reported successfully."
+}]]></programlisting>
+
+          <caption><para>Show XML payload of REST response.</para></caption>
+          <programlisting><![CDATA[
+<Response>
+  <Statuscode>OK</Statuscode>
+  <Message>Noise level reported successfully.</Message>
+</Response>]]></programlisting>
+        </sect3>
+      </para>
+    </sect2>
+  </sect1>
+
+  <sect1 id="soundSamples">
+    <title>Sound Samples Resource</title>
+
+    <para>
+      This resource handles all requests related to sound samples.
+    </para>
+
+    <sect2 id="listSamples">
+      <title>List nearby sound samples</title>
+
+      <para>
+        <emphasis role="rest-url">&BASE_URL;<emphasis role="bold">soundSamples/list/?latitude=&lt;1&gt;&amp;longitude=&lt;2&gt;&amp;range=&lt;3&gt;</emphasis></emphasis>
+
+        <sect3>
+          <title>Description</title>
+
+          <para>
+            Get a list of sound samples that were recorded in the nearby area. The method will not return the sound samples themselves, but their metadata.
+          </para>
+
+          <para>
+            The REST response will include a <literal>SampleID</literal> for each sound sample. This unique identifier can be used to download the binary data of the corresponding audio recording. The script hosted on the SotC server will deliver the file as a direct HTTP download:
+
+            <emphasis role="rest-url">&DOWNLOAD_URL;<emphasis role="bold">&lt;SampleID&gt;</emphasis></emphasis>
+
+            For example, if you want to download an audio recording with the sample ID <literal>b64f3dbd20329d9af01ff21eed64ff0c</literal>, issue an HTTP request to the following URL:
+
+            <emphasis role="rest-url">&DOWNLOAD_URL;<emphasis role="bold">b64f3dbd20329d9af01ff21eed64ff0c</emphasis></emphasis>
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Arguments</title>
+
+          <para>
+            <variablelist>
+              <varlistentry>
+                <term>latitude</term>
+                <listitem>
+                  <para>
+                    Latitude value of geo location (e.g. <literal>53.834208</literal>). Decimal value in the range of +/- 90.0°. Geo locations are processed as <ulink url="http://en.wikipedia.org/wiki/Decimal_degrees">decimal degrees</ulink>.
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>longitude</term>
+                <listitem>
+                  <para>
+                    Longitude value of geo location (e.g. <literal>10.700136</literal>). Decimal value in the range of +/- 180.0°. Geo locations are processed as <ulink url="http://en.wikipedia.org/wiki/Decimal_degrees">decimal degrees</ulink>.
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>range</term>
+                <listitem>
+                  <para>
+                    Lateral length of a square, which is centered on the geo location (e.g. <literal>3.0</literal>). Decimal value. Unit is km. 0.01 degree is equal to 1.11 km, so 1 km is about 0.009 degree.
+                  </para>
+                </listitem>
+              </varlistentry>
+            </variablelist>
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Body Payload</title>
+
+          <para>
+            This is a GET request without body payload.
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Return Message</title>
+
+          <para>
+            The method will return a status code (e.g. <literal>OK</literal> or <literal>Error</literal>), a human-readable message, a list of sound samples (if any) and a result count (i.e. number of results returned).
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Examples</title>
+
+          <caption><para>Show JSON payload of REST response.</para></caption>
+          <programlisting><![CDATA[
+{
+  "Statuscode": "OK",
+  "Message": "Sound samples queried successfully.",
+  "SampleData": {
+    "0": {
+      "Latitude": "51.58000",
+      "Longitude": "7.60000",
+      "Title": "Construction site",
+      "Timestamp": "1349964015",
+      "Description": "Drill on a construction site.",
+      "SampleID": "1ceb8089e7441732e10866019101e44f"
+    },
+    "1": {
+      "Latitude": "51.58000",
+      "Longitude": "7.60000",
+      "Title": "Car sound",
+      "Timestamp": "1350092454",
+      "Description": "A Ferrari in the city.",
+      "SampleID": "b64f3dbd20329d9af01ff21eed64ff0c"
+    },
+    "2": {
+      "Latitude": "51.58000",
+      "Longitude": "7.60000",
+      "Title": "Ducks",
+      "Timestamp": "1350082846",
+      "Description": "A group of ducks in the city park.",
+      "SampleID": "5851478d17719a6beaf3eeeff03d6a46"
+    }
+  },
+  "ResultCount": 3
+}]]></programlisting>
+
+          <caption><para>Show XML payload of REST response.</para></caption>
+          <programlisting><![CDATA[
+<Response>
+  <Statuscode>OK</Statuscode>
+  <Message>Sound samples queried successfully.</Message>
+  <SampleData>
+    <Item>
+      <Latitude>51.58000</Latitude>
+      <Longitude>7.60000</Longitude>
+      <Title>Construction site</Title>
+      <Timestamp>1349964015</Timestamp>
+      <Description>Drill on a construction site.</Description>
+      <SampleID>1ceb8089e7441732e10866019101e44f</SampleID>
+    </Item>
+    <Item>
+      <Latitude>51.58000</Latitude>
+      <Longitude>7.60000</Longitude>
+      <Title>Car sound</Title>
+      <Timestamp>1350092454</Timestamp>
+      <Description>A Ferrari in the city.</Description>
+      <SampleID>b64f3dbd20329d9af01ff21eed64ff0c</SampleID>
+    </Item>
+    <Item>
+      <Latitude>51.58000</Latitude>
+      <Longitude>7.60000</Longitude>
+      <Title>Ducks</Title>
+      <Timestamp>1350092454</Timestamp>
+      <Description>A group of ducks in the city park.</Description>
+      <SampleID>b64f3dbd20329d9af01ff21eed64ff0c</SampleID>
+    </Item>
+  </SampleData>
+  <ResultCount>3</ResultCount>
+</Response>]]></programlisting>
+        </sect3>
+      </para>
+    </sect2>
+
+    <sect2 id="uploadSample">
+      <title>Upload sound sample</title>
+
+      <para>
+        <emphasis role="rest-url">&BASE_URL;<emphasis role="bold">soundSamples/upload/?latitude=&lt;1&gt;&amp;longitude=&lt;2&gt;</emphasis></emphasis>
+
+        <sect3>
+          <title>Description</title>
+
+          <para>
+            Upload a sound sample to the server. The recording location is specified by geo coordinates (latitude/longitude).
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Arguments</title>
+
+          <para>
+            <variablelist>
+              <varlistentry>
+                <term>latitude</term>
+                <listitem>
+                  <para>
+                    Latitude value of geo location (e.g. <literal>53.834208</literal>). Decimal value in the range of +/- 90.0°. Geo locations are processed as <ulink url="http://en.wikipedia.org/wiki/Decimal_degrees">decimal degrees</ulink>.
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>longitude</term>
+                <listitem>
+                  <para>
+                    Longitude value of geo location (e.g. <literal>10.700136</literal>). Decimal value in the range of +/- 180.0°. Geo locations are processed as <ulink url="http://en.wikipedia.org/wiki/Decimal_degrees">decimal degrees</ulink>.
+                  </para>
+                </listitem>
+              </varlistentry>
+            </variablelist>
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Body Payload</title>
+
+          <para>
+            This is a POST request with body payload. If you want to upload sound samples, please use your <ulink url="documentation.html#apiKeys">API key for authentification</ulink>.
+          </para>
+
+          <para>
+            <variablelist>
+              <varlistentry>
+                <term>Title</term>
+                <listitem>
+                  <para>
+                    Short title for the sound sample. String value with a maximum length of 255 characters. <emphasis>This parameter is optional.</emphasis>
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>Time</term>
+                <listitem>
+                  <para>
+                    Time of the sound sample recording. <ulink url="http://en.wikipedia.org/wiki/Unix_time">UNIX timestamp</ulink> as a string value with a maximum length of 80 characters.
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>Description</term>
+                <listitem>
+                  <para>
+                    Detailed description of the sound sample. String value with no limitation on the text length. <emphasis>This parameter is optional.</emphasis>
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>PayloadType</term>
+                <listitem>
+                  <para>
+                    Identifier for the audio format that was used to encode the sound sample. String value. Either one of <literal>mp3</literal>, <literal>m4a</literal> or <literal>ogg</literal>.
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>Payload</term>
+                <listitem>
+                  <para>
+                    <ulink url="http://en.wikipedia.org/wiki/Base64">Base64-encoded</ulink> binary data of the sound sample. String value with no limitation on the text length. However, the upload of very huge files may fail. The service was designed for short audio files and works best with files that have a size of about 3 MB or less.
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>ReportedBy</term>
+                <listitem>
+                  <para>
+                    Identifier for client that uploaded the sound sample. String value with a maximum length of 80 characters. <emphasis role="issue">Pass an empty string, unless you know how this argument is used internally.</emphasis>
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>AppName</term>
+                <listitem>
+                  <para>
+                    Identifier for application that uploads the sound sample. String value with a maximum length of 80 characters. The application name is case sensitive. You need to <ulink url="documentation.html#apiKeys">apply for an API key</ulink>, before you can issue POST requests.
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>ApiKey</term>
+                <listitem>
+                  <para>
+                    API key that matches your application's name. String value with a maximum length of 32 characters. You need to <ulink url="documentation.html#apiKeys">apply for an API key</ulink>, before you can issue POST requests.
+                  </para>
+                </listitem>
+              </varlistentry>
+            </variablelist>
+          </para>
+
+          <para>
+            In the following code box you can see a sample POST request for sound sample uploading:
+          </para>
+
+          <caption><para>Show JSON payload of REST request.</para></caption>
+          <programlisting><![CDATA[
+{
+  "Title": "Church bell",
+  "Time": "1350164562",
+  "Description": "Hear the church bells ring.",
+  "PayloadType": "mp3",]]>
+  <emphasis role="bold">"Payload": "&lt;Base64-encoded Sound Sample&gt;",</emphasis>
+<![CDATA[  "ReportedBy": "",
+  "AppName": "SotC Android App",
+  "ApiKey": "62adf8ee76d4b497dd4df5de69ca9f83"
+}]]></programlisting>
+        </sect3>
+
+        <sect3>
+          <title>Return Message</title>
+
+          <para>
+            The method will return a status code (e.g. <literal>OK</literal> or <literal>Error</literal>), a human-readable message and an identifier for the newly uploaded sound sample.
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Examples</title>
+
+          <caption><para>Show JSON payload of REST response.</para></caption>
+          <programlisting><![CDATA[
+{
+  "Statuscode": "OK",
+  "Message": "Media file uploaded successfully.",
+  "SampleID": "369183042e5654bd8197aab9da2a8ded"
+}]]></programlisting>
+
+          <caption><para>Show XML payload of REST response.</para></caption>
+          <programlisting><![CDATA[
+<Response>
+  <Statuscode>OK</Statuscode>
+  <Message>Media file uploaded successfully.</Message>
+  <SampleID>369183042e5654bd8197aab9da2a8ded</SampleID>
+</Response>]]></programlisting>
+        </sect3>
+      </para>
+    </sect2>
+  </sect1>
+
+  <sect1 id="deviceInfos">
+    <title>Device Infos Resource</title>
+
+    <para>
+      This resource handles all requests related to device information.
+    </para>
+
+    <sect2 id="reportInfos">
+      <title>Report device information</title>
+
+      <para>
+        <emphasis role="rest-url">&BASE_URL;<emphasis role="bold">deviceInfos/report/</emphasis></emphasis>
+
+        <sect3>
+          <title>Description</title>
+
+          <para>
+            Report device information. <emphasis role="issue">This method is intended for internal use only.</emphasis>
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Arguments</title>
+
+          <para>
+            This is a POST request without any URL arguments.
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Body Payload</title>
+
+          <para>
+            This is a POST request with body payload. If you want to report device information, please use your <ulink url="documentation.html#apiKeys">API key for authentification</ulink>.
+          </para>
+
+          <para>
+            <variablelist>
+              <varlistentry>
+                <term>OSVersion</term>
+                <listitem>
+                  <para>
+                    Version number of the device's operating system (e.g. <literal>2.6.35.7-perf</literal>). String value with a maximum length of 80 characters.
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>APILevel</term>
+                <listitem>
+                  <para>
+                    API level of the device's operating system (e.g. <literal>10</literal>). String value with a maximum length of 20 characters.
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>DeviceType</term>
+                <listitem>
+                  <para>
+                    Type of the user's device (e.g. <literal>GT-I9001</literal>). String value with a maximum length of 80 characters.
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>ReportedBy</term>
+                <listitem>
+                  <para>
+                    Identifier for client that reported the device information. String value with a maximum length of 80 characters. <emphasis role="issue">Pass an empty string, unless you know how this argument is used internally.</emphasis>
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>AppName</term>
+                <listitem>
+                  <para>
+                    Identifier for application that reports the device information. String value with a maximum length of 80 characters. The application name is case sensitive. You need to <ulink url="documentation.html#apiKeys">apply for an API key</ulink>, before you can issue POST requests.
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>ApiKey</term>
+                <listitem>
+                  <para>
+                    API key that matches your application's name. String value with a maximum length of 32 characters. You need to <ulink url="documentation.html#apiKeys">apply for an API key</ulink>, before you can issue POST requests.
+                  </para>
+                </listitem>
+              </varlistentry>
+            </variablelist>
+          </para>
+
+          <para>
+            In the following code box you can see a sample POST request for device information reporting:
+          </para>
+
+          <caption><para>Show JSON payload of REST request.</para></caption>
+          <programlisting><![CDATA[
+{
+  "OSVersion": "2.6.35.7-perf",
+  "APILevel": "10",
+  "DeviceType": "GT-I9001",
+  "ReportedBy": "",
+  "AppName": "SotC Android App",
+  "ApiKey": "62adf8ee76d4b497dd4df5de69ca9f83"
+}]]></programlisting>
+        </sect3>
+
+        <sect3>
+          <title>Return Message</title>
+
+          <para>
+            The method will return a status code (e.g. <literal>OK</literal> or <literal>Error</literal>) and a human-readable message.
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Examples</title>
+
+          <caption><para>Show JSON payload of REST response.</para></caption>
+          <programlisting><![CDATA[
+{
+  "Statuscode": "OK",
+  "Message": "Device info reported successfully."
+}]]></programlisting>
+
+          <caption><para>Show XML payload of REST response.</para></caption>
+          <programlisting><![CDATA[
+<Response>
+  <Statuscode>OK</Statuscode>
+  <Message>Device info reported successfully.</Message>
+</Response>]]></programlisting>
+        </sect3>
+      </para>
+    </sect2>
+  </sect1>
+
+  <sect1 id="history">
+    <title>Release History</title>
+
+    <sect2 id="v1">
+      <title>Version 1</title>
+
+      <para>
+        Released on 2012-10-17.
+      </para>
+
+      <itemizedlist>
+        <listitem><para>Initial version of the SotC REST API.</para></listitem>
+        <listitem><para>Features equivalent to prior SOAP webservice.</para></listitem>
+      </itemizedlist>
+    </sect2>
+  </sect1>
+</article>

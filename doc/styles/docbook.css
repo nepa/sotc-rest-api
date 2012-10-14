@@ -1,0 +1,283 @@
+/**
+ * Section headline, second level.
+ */
+h2
+{
+  font-size: 215% !important;
+}
+
+/**
+ * Section headline, third level.
+ */
+h3
+{
+  font-size: 150% !important;
+}
+
+/**
+ * Decrease size of author's name.
+ */
+h3.author
+{
+  font-size: 85% !important;
+}
+
+/**
+ * Section headline, fourth level.
+ */
+h4
+{
+  font-size: 130% !important;
+}
+
+/**
+ * Add colon after headline.
+ */
+h4:after
+{
+  content: ":";
+}
+
+/**
+ * Add some space between items in document header.
+ */
+p.copyright, div.legalnotice, p.pubdate
+{
+  padding-bottom: 5px;
+}
+
+/**
+ * Add some space arount table of contents.
+ */
+div.toc
+{
+  padding: 15px;
+}
+
+/**
+ * Position definition term items in TOC.
+ */
+div.toc dt
+{
+  padding: 3px;
+  padding-left: 20px;
+}
+
+/**
+ * Indention in TOC, first level.
+ */
+span.section, span.sect1
+{
+  padding-left: 5px;
+}
+
+/**
+ * Indention in TOC, second level.
+ */
+span.sect2
+{
+  padding-left: 25px;
+}
+
+/**
+ * Indention in TOC, third level.
+ */
+span.sect3
+{
+  padding-left: 35px;
+}
+
+/**
+ * Message boxes in text.
+ */
+div.note, div.warning
+{
+  padding: 15px;
+  padding-left: 30px;
+  margin-right: 45px;
+  border-radius: 5px;
+}
+
+/**
+ * Orange colors for note boxes.
+ */
+div.note
+{
+  background-color: #FFFBCC;
+  border: 1px solid #E6DB55;
+}
+
+/**
+ * Red colors for warning boxes.
+ */
+div.warning
+{
+  background-color: #FFBABA;
+  border: 1px solid #D8000C;
+}
+
+/**
+ * Headlines in message boxes.
+ */
+div.note h3, div.warning h3
+{
+  font-size: 150% !important;
+  font-weight: bold;
+}
+
+/**
+ * Add some space between first level sections.
+ */
+div.section, div.sect1
+{
+  margin-top: 30px;
+}
+
+/**
+ * Position paragraphs within sections and set line height.
+ */
+div.section p, div.sect1 p, div.sect2 p, div.sect3 p
+{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  line-height: 1.6em;
+}
+
+/**
+ * Do NOT color target of anchor links. This is sort of a
+ * DocBook thing. Just set the link color to the color of
+ * normal text and everything looks fine.
+ */
+div.section p a, div.sect1 p a, div.sect2 p a, div.sect3 p a
+{
+  color: #333333 !important;
+}
+
+/**
+ * Normal links in text should have a reddish color, though.
+ */
+div.section p a.ulink, div.sect1 p a.ulink, div.sect2 p a.ulink, div.sect3 p a.ulink
+{
+  color: #A3443E !important;
+}
+
+/**
+ * Position second level sections and add a dotted line below.
+ */
+div.sect2
+{
+  margin-top: 20px;
+  margin-bottom: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px dotted #333333;
+}
+
+/**
+ * Position third level sections.
+ */
+div.sect3
+{
+  margin-top: 15px;
+  margin-left: 30px;
+}
+
+/**
+ * Set inline code in bold monospace font.
+ */
+code.literal
+{
+  font-weight: bold;
+  font-family: monospace;
+}
+
+/**
+ * Draw a nice box with rounded borders for URLs in text.
+ */
+span.rest-url
+{
+  display: block;
+  padding: 5px;
+  padding-left: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #FAFAFA;
+  border: 1px solid #666666;
+  border-radius: 5px;
+  font-family: monospace;
+}
+
+/**
+ * Special style for emphasized elements in text.
+ */
+span.bold
+{
+  color: #A3443E;
+  font-weight: bold;
+}
+
+/**
+ * Highlight emphasized elements on mouse-over.
+ */
+span.bold:hover
+{
+  color: #FF0000;
+  cursor: pointer;
+}
+
+/**
+ * Special style for content that is considered to be
+ * an issue (e.g. TODO or something still unclear).
+ */
+span.issue
+{
+  color: #008000;
+  font-style: italic;
+  cursor: help;
+}
+
+/**
+ * Add a label in front of content that is considered
+ * to be an issue.
+ */
+span.issue:before
+{
+  content: "(ISSUE) ";
+}
+
+/**
+ * Definition list (variablelist).
+ */
+div.variablelist span.term
+{
+  color: #A3443E !important;
+  font-size: 130%;
+  text-decoration: italic;
+}
+
+/**
+ * Definition term in definition list.
+ */
+div.variablelist dt
+{
+  margin-left: 25px;
+  margin-bottom: 5px;
+}
+
+/**
+ * Definition description in definition list.
+ */
+div.variablelist dd
+{
+  margin-left: 45px;
+  width: 600px;
+}
+
+/**
+ * Unordered, itemized list in text.
+ */
+ul.itemizedlist
+{
+  margin-left: 30px;
+}

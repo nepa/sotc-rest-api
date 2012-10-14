@@ -1,0 +1,305 @@
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+
+  <!-- Import base DocBook XSL template for HTML output -->
+  <xsl:import href="./docbook-xsl-ns/xhtml-1_1/docbook.xsl"/>
+
+  <!-- Plug-in your custom templates here -->
+  <xsl:template match="/">
+    <!-- Call code from imported stylesheet -->
+    <xsl:apply-imports/>
+
+    <!-- Call custom templates -->
+    <!-- <xsl:call-template name="myTemplateName"/> -->
+  </xsl:template>
+
+  <!-- Do not output <html>, <head> and <body> element -->
+  <xsl:template match="*" mode="process.root">
+    <xsl:call-template name="header"/>
+
+    <xsl:call-template name="root.messages"/>
+    <xsl:apply-templates select="."/>
+
+    <xsl:call-template name="footer"/>
+  </xsl:template>
+
+  <!-- Print custom header above content -->
+  <xsl:template name="header">
+    <xsl:text disable-output-escaping="yes"><![CDATA[
+<!DOCTYPE html>
+<head>
+<title>Sound of the City | API Dokumentation</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+<link rel="stylesheet" href="styles/docbook.css" type="text/css" />
+<!-- TODO: <link rel="stylesheet" href="styles/elegant-press.css" type="text/css" /> -->
+<link rel="stylesheet" href="http://citysound.itm.uni-luebeck.de/styles/elegant-press.css" type="text/css" />
+<script src="scripts/elegant-press.js" type="text/javascript"></script>
+
+<!--[if IE]><style>#header h1 a:hover{font-size:75px;}</style><![endif]-->
+
+<script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCE5Umt0E-J0s_iAloRN-ii4d-9YRQelAk&sensor=false"> </script>
+<script src="scripts/soundmap.js" type="text/javascript"></script>
+
+<script src="scripts/floating-1.8.js" type="text/javascript"></script>
+
+
+<!--  BEGIN Streaming Player -->
+
+<!--  BEGIN Browser History required section -->
+<link rel="stylesheet" type="text/css" href="history/history.css" />
+<!--  END Browser History required section -->
+<script type='text/javascript' src='/soundofcity_player/AC_OETags.js'></script>
+
+
+<script language="JavaScript" type="text/javascript">
+<!--
+// -----------------------------------------------------------------------------
+// Globals
+// Major version of Flash required
+var requiredMajorVersion = 10;
+// Minor version of Flash required
+var requiredMinorVersion = 2;
+// Minor version of Flash required
+var requiredRevision = 0;
+// -----------------------------------------------------------------------------
+// -->
+</script>
+
+<!--  END Streaming Player -->
+
+<script type="text/javascript">
+
+ var _gaq = _gaq || [];
+ _gaq.push(['_setAccount', 'UA-31871354-1']);
+ _gaq.push(['_trackPageview']);
+
+ (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+ })();
+
+</script>
+
+<!-- BEGIN OF EXPANDABLE CODE BLOCKS -->
+<style type="text/css">
+div.caption
+{
+  margin: 1px;
+  margin-top: 15px;
+  margin-bottom: 3px;
+  padding: 5px;
+  padding-left: 15px;
+  cursor: pointer;
+  position: relative;
+  background-color: #E0E0E0;
+  border: 1px solid #666666;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+div.caption p
+{
+  margin: 0;
+  padding: 0;
+  color: #333333;
+}
+
+pre.programlisting
+{
+  padding: 20px 10px;
+  color: #333333;
+  background-color: #FAFAFA;
+  border: 1px solid #666666;
+  border-radius: 5px;
+  font-family: monospace;
+}
+</style>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $('pre.programlisting').hide();
+
+  $('div.caption').click(function()
+  {
+    // Toggle visibility of next code block
+    $(this).next('pre.programlisting').slideToggle(500);
+
+    // Toggle caption
+    var caption = $(this).children('p').text();
+    if (caption.match('^Show'))
+    {
+      caption = caption.replace('Show', 'Hide');
+    }
+    else if (caption.match('^Hide'))
+    {
+      caption = caption.replace('Hide', 'Show');
+    }
+    $(this).children('p').text(caption);
+  });
+});
+</script>
+<!-- END OF EXPANDABLE CODE BLOCKS -->
+
+</head>
+<body onLoad="getSoundSamples();">
+
+<! ------ --------------------------------------------Report bug---------------------------------------------------------------->
+ <div id="floatdiv" style="
+        position:absolute;
+        width:60px;height:120px;top:10px;right:10px;
+        padding:2px;
+        z-index:100">
+   <a href="report_bugs.html"> <img src="images/bug_icon.png" width="60px" height = "120px"/> </a>
+    </div>
+
+    <script type="text/javascript">
+        floatingMenu.add('floatdiv',
+            {
+                // Represents distance from left or right browser window
+                // border depending upon property used. Only one should be
+                // specified.
+                // targetLeft: 10,
+                 targetRight: 10,
+
+                // Represents distance from top or bottom browser window
+                // border depending upon property used. Only one should be
+                // specified.
+                targetTop: 10,
+                // targetBottom: 0,
+
+                // Uncomment one of those if you need centering on
+                // X- or Y- axis.
+                // centerX: true,
+                 centerY: true,
+
+                // Remove this one if you don't want snap effect
+                snap: true
+            });
+    </script>
+<! ------ --------------------------------------------Report bug---------------------------------------------------------------->
+
+<div class="main-container">
+   <header>
+    <h1><a href="index.html">Sound of the City</a> </h1>
+    <p id="tagline" align="center"><img src="images/SoundOfTheCity.png" alt="logo"/></p>
+    <br/>
+    <p id="tagline"><strong>Smart luebeck 2012</strong></p>
+  </header>
+</div>
+<div class="main-container">
+  <div id="sub-headline">
+    <div class="tagline_left"><p id="tagline2"><a href="http://www.itm.uni-luebeck.de/">Institut für Telematik - Universität zu Lübeck</a></p></div>
+
+    <br class="clear" />
+  </div>
+</div>
+<div class="main-container">
+  <div id="nav-container">
+   <nav>
+    <ul class="nav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="media.html">Medien</a></li>
+      <li><a href="#">Interaktive Karte</a>
+        <ul>
+          <li><a href="soundmap.html">Sound Map</a></li>
+          <li><a href="noisemap.html">Noise Map</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Entwicklerecke</a>
+        <ul>
+          <li><a href="technical.html">Technische Beschreibung</a></li>
+          <li class="active"><a href="documentation.html">API Dokumentation</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html">Kontakt</a></li>
+      <li class="last"><a href="index_en.html"> <img src="images/ukflag.png" width="20px" height = "20px"/>En</a></li>
+    </ul>
+   </nav>
+    <div class="clear"></div>
+  </div>
+</div>
+<div class="main-container">
+  <div class="container1">
+   <div id="breadcrumb">
+    <ul>
+      <li class="first">You Are Here</li>
+      <li>&#187;</li>
+      <li><a href="index.html">Homepage</a></li>
+      <li>&#187;</li>
+      <li class="current"><a href="documentation.html">API Dokumentation</a></li>
+    </ul>
+   </div>
+   <br />
+   <br />
+   <!-- BEGIN OF DOCUMENTATION -->]]></xsl:text>
+  </xsl:template>
+
+  <!-- Print custom footer below content -->
+  <xsl:template name="footer">
+    <xsl:text disable-output-escaping="yes"><![CDATA[
+   <!-- END OF DOCUMENTATION -->
+   <br />
+
+   <div class="clear"></div>
+  </div>
+ </div>
+<div class="main-container"></div>
+
+<div class="callout">
+    <div class="calloutcontainer">
+        <div class="container_12">
+            <div class="grid">
+
+
+ <!-- BEGIN News section -->
+  <div id="loadNews">
+  <script>
+  $('#loadNews').load('dynamic/news.txt');
+  </script>
+        </div>
+        <!-- END News section -->
+
+        <!-- BEGIN Social Media section -->
+  <div id="loadSocialMedia">
+  <script>
+  $('#loadSocialMedia').load('dynamic/socialmedia.txt');
+  </script>
+        </div>
+        <!-- END Social Media section -->
+
+        <!-- BEGIN Affiliations section -->
+  <div id="loadAffiliations">
+  <script>
+  $('#loadAffiliations').load('dynamic/affiliations.txt');
+  </script>
+        </div>
+        <!-- END Affiliations section -->
+
+
+
+            <div class="clear"></div>
+        </div>
+        <div class="calloutoverlay"></div>
+        <div class="calloutoverlaybottom"></div>
+    </div>
+</div> </div>
+ <footer>
+    <p class="tagline_left">Copyright &copy; 2012 - All Rights Reserved - <a href="#">Sound of the City</a></p>
+    <p class="tagline_right">Design by <a href="http://www.priteshgupta.com/" title="Pritesh Gupta" target="_blank" >PriteshGupta.com</a></p>
+    <br class="clear" />
+ </footer>
+
+ <br />
+ <br />
+
+<!-- Free template distributed by http://freehtml5templates.com -->
+    </body>
+</html>]]></xsl:text>
+  </xsl:template>
+
+</xsl:stylesheet>

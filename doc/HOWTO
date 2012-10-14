@@ -1,0 +1,23 @@
+#
+# HOWTO: Create documentation for the SotC REST API
+#
+
+This file contains instructions on how to generate the HTML documentation.
+
+
+# 1. Download DocBook package:
+wget http://sourceforge.net/projects/docbook/files/docbook-xsl-ns/1.75.1/docbook-xsl-ns-1.75.1.zip/download
+
+# 2. Unzip file:
+unzip docbook-xsl-ns-1.75.1.zip
+
+# 3. Rename folder:
+mv docbook-xsl-ns-1.75.1 docbook-xsl-ns
+
+# 4. Run HTML generator:
+xsltproc --stringparam punct.honorific "" --output temp.html style.xls v1.xml && tail -n +4 temp.html > documentation.html && rm temp.html
+
+
+The last step will run the XSLT processor. The first argument omits the period after German honorific titles, so that we get "Dipl.-Inform." instead of "Dipl.-Inform.." (note the two periods at the end). Then the output is written to 'temp.html', using the DocBook style from 'style.xls' and the text from 'v1.xml'. Afterwards, a few lines of the newly created document are stripped, because they contain bogus data. The final document is then written to 'documentation.html'.
+
+This is a little hack to get rid of the XML version declaration and DOCTYPE that DocBook creates.
