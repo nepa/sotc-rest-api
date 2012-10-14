@@ -124,10 +124,19 @@ class SoundSamplesController extends BaseController
         Authentication::validate($bodyData['AppName'], $bodyData['ApiKey']))
     {
       // Upload sound sample
-      if (isset($arguments['latitude']) && isset($arguments['longitude']) && isset($bodyData['Title']) &&
-          isset($bodyData['Time']) && isset($bodyData['Description']) && isset($bodyData['PayloadType']) &&
-          isset($bodyData['Payload']) && isset($bodyData['ReportedBy']))
+      if (isset($arguments['latitude']) && isset($arguments['longitude']) && isset($bodyData['Time']) &&
+          isset($bodyData['PayloadType']) && isset($bodyData['Payload']) && isset($bodyData['ReportedBy']))
       {
+        // Prevent PHP notice because of undefined index
+        if (!isset($bodyData['Title']))
+        {
+          $bodyData['Title'] = null;
+        }
+        if (!isset($bodyData['Description']))
+        {
+          $bodyData['Description'] = null;
+        }
+
         $result = MediaServer::handleUploadRequest(
                     $arguments['latitude'],
                     $arguments['longitude'],

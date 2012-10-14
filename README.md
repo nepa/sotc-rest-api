@@ -58,6 +58,8 @@ To install the SotC REST API, copy all files from the `src` folder to your webse
 
 Next, open the `.htaccess` file and modify the `RewriteBase` entry such, that it points to your installation directory. Then edit `index.php` and set the PHP constant `BACKEND_LOCATION` to the path where your installation of the Server-One service backend resides. The path must be relative to your API location and must **not** have a trailing slash.
 
+When you are running the SotC REST API in a live environment, you should finally disable PHP's error reporting by passing `0` to the `error_reporting()` method at the very beginning of `index.php`. This will prevent hackers from gaining confidential information about the service you are hosting.
+
 ### Authentication
 
 Reading access to the REST interface is not limited by and means. Writing access is forbidden, unless the client provides a valid API key in the POST request. Credentials for client authentication, namely a pair of _application name_ and _API key_, are stored in their own database table. The `Authentication` class, which is part of the Server-One code base, will take care of API key generation and validation of authentication data.
