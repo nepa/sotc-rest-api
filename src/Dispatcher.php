@@ -15,12 +15,29 @@ function autoloadClasses($className)
   // Class is a resource controller
   if (preg_match('/^[A-Za-z]+Controller$/', $className))
   {
-    require_once(dirname(__FILE__) . '/controller/' . $className . '.php');
+    $controllerFile = dirname(__FILE__) . '/controller/' . $className . '.php';
+    if (file_exists($controllerFile))
+    {
+      require_once($controllerFile);
+    }
+    else
+    {
+      throw new Exception('Could not load \'' . $className . '\' class. There is no such controller.');
+    }
   }
+
   // Class is an output handler
   else if (preg_match('/^[A-Za-z]+OutputHandler$/', $className))
   {
-    require_once(dirname(__FILE__) . '/outputHandler/' . $className . '.php');
+    $outputHandlerFile = dirname(__FILE__) . '/outputHandler/' . $className . '.php';
+    if (file_exists($outputHandlerFile))
+    {
+      require_once($outputHandlerFile);
+    }
+    else
+    {
+      throw new Exception('Could not load \'' . $className . '\' class. There is no such output handler.');
+    }
   }
 }
 

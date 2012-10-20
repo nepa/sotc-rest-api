@@ -102,7 +102,14 @@ class Request
         break;
 
       default:
-        throw new Exception('Unsupported content type \'' . $content_type . '\' in request.');
+        if (empty($content_type))
+        {
+          throw new Exception('No content type in request. Please set the \'Content-Type\' header.');
+        }
+        else
+        {
+          throw new Exception('Unsupported content type \'' . $content_type . '\' in request.');
+        }
         break;
     }
     $bodyData = $body;

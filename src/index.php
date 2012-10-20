@@ -17,16 +17,16 @@ $request = null;
 try
 {
   $request = new Request();
+
+  // Handle request
+  if (!is_null($request))
+  {
+    Dispatcher::handleRequest($request);
+  }
 }
 catch (Exception $e)
 {
-  echo '<p><b>Error:</b> ' . $e->getMessage() . '</p>';
-}
-
-// Handle request
-if (!is_null($request))
-{
-  Dispatcher::handleRequest($request);
+  echo 'Error: ' . $e->getMessage();
 }
 
 ?>
