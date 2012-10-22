@@ -6,7 +6,7 @@ This file contains instructions on how to generate the HTML documentation.
 
 
 # 1. Download DocBook package:
-wget http://sourceforge.net/projects/docbook/files/docbook-xsl-ns/1.75.1/docbook-xsl-ns-1.75.1.zip/download
+wget --output-document docbook-xsl-ns-1.75.1.zip http://sourceforge.net/projects/docbook/files/docbook-xsl-ns/1.75.1/docbook-xsl-ns-1.75.1.zip/download
 
 # 2. Unzip file:
 unzip docbook-xsl-ns-1.75.1.zip

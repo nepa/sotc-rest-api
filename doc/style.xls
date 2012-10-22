@@ -34,6 +34,7 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 
 <link rel="stylesheet" href="styles/docbook.css" type="text/css" />
+<!-- TODO: Use this for local testing: <link rel="stylesheet" href="http://citysound.itm.uni-luebeck.de/styles/elegant-press.css" type="text/css" /> -->
 <link rel="stylesheet" href="styles/elegant-press.css" type="text/css" />
 <script src="scripts/elegant-press.js" type="text/javascript"></script>
 
