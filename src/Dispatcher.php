@@ -72,16 +72,19 @@ class Dispatcher
       // Get requested action within controller
       $actionName = strtolower($request->getHTTPVerb()) . 'Action';
 
-      // Do the action!
-      $result = $controller->$actionName($request);
-
-      // Send REST response to client
-      $outputHandlerName = ucfirst($request->getFormat()) . 'OutputHandler';
-
-      if (class_exists($outputHandlerName))
+      if (method_exists($controller, $actionName))
       {
-        $outputHandler = new $outputHandlerName();
-        $outputHandler->render($result);
+        // Do the action!
+        $result = $controller->$actionName($request);
+
+        // Send REST response to client
+        $outputHandlerName = ucfirst($request->getFormat()) . 'OutputHandler';
+
+        if (class_exists($outputHandlerName))
+        {
+          $outputHandler = new $outputHandlerName();
+          $outputHandler->render($result);
+        }
       }
     }
   }
