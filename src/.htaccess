@@ -1,5 +1,6 @@
 RewriteEngine On
-# TODO: Set path to API URL:
+# TODO: Set path to REST API
+# On live server: /rest/v1/
 RewriteBase /sotc-rest-api/src/
 
 RewriteCond %{REQUEST_FILENAME} !-f
