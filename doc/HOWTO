@@ -21,3 +21,8 @@ xsltproc --stringparam punct.honorific "" --output temp.html style.xls v1.xml &&
 The last step will run the XSLT processor. The first argument omits the period after German honorific titles, so that we get "Dipl.-Inform." instead of "Dipl.-Inform.." (note the two periods at the end). Then the output is written to 'temp.html', using the DocBook style from 'style.xls' and the text from 'v1.xml'. Afterwards, a few lines of the newly created document are stripped, because they contain bogus data. The final document is then written to 'documentation.html'.
 
 This is a little hack to get rid of the XML version declaration and DOCTYPE that DocBook creates.
+
+
+# 5. Create English documentation:
+
+The script will only generate the German documentation. Copy the file and change page names, navigation menu and breadcrumbs manually, if you want to create English documentation as well.

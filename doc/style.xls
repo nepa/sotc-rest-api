@@ -227,7 +227,7 @@ $(document).ready(function() {
   <div class="container1">
    <div id="breadcrumb">
     <ul>
-      <li class="first">You Are Here</li>
+      <li class="first">Sie sind hier</li>
       <li>&#187;</li>
       <li><a href="index.html">Homepage</a></li>
       <li>&#187;</li>
