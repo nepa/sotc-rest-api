@@ -210,14 +210,14 @@ $(document).ready(function() {
    <!-- BEGIN OF DOCUMENTATION --><div xmlns="http://www.w3.org/1999/xhtml" class="article" title="Sound of the City REST API"><div class="titlepage"><div><div><h2 class="title"><a id="idp128"/>Sound of the City REST API</h2></div><div><div class="author"><h3 class="author"><span class="honorific">Dipl.-Inform. (FH)</span> <span class="firstname">Sascha</span> <span class="surname">Seidel</span></h3></div></div><div><p class="copyright">Copyright © 2011, 2012 Institute of Telematics</p></div><div><div class="legalnotice" title="Legal Notice"><a id="idp84760"/>
       <p>This work is licensed under the Creative Commons Attribution 3.0 Unported License.</p>
     </div></div><div><p class="pubdate">Documentation for API v1. Last update on 2012-10-17.</p></div></div><hr/></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#introduction">Introduction</a></span></dt><dt><span class="sect1"><a href="#resources">Resources</a></span></dt><dt><span class="sect1"><a href="#apiKeys">Writing Access</a></span></dt><dt><span class="sect1"><a href="#formats">Message Formats</a></span></dt><dt><span class="sect1"><a href="#gettingStarted">Getting Started</a></span></dt><dt><span class="sect1"><a href="#noiseLevels">Noise Levels Resource</a></span></dt><dd><dl><dt><span class="sect2"><a href="#averageGeo">Get average noise level by geo coordinates</a></span></dt><dt><span class="sect2"><a href="#averageZip">Get average noise level by zip code</a></span></dt><dt><span class="sect2"><a href="#listLevels">List nearby noise levels</a></span></dt><dt><span class="sect2"><a href="#reportLevel">Report noise level</a></span></dt></dl></dd><dt><span class="sect1"><a href="#soundSamples">Sound Samples Resource</a></span></dt><dd><dl><dt><span class="sect2"><a href="#listSamples">List nearby sound samples</a></span></dt><dt><span class="sect2"><a href="#uploadSample">Upload sound sample</a></span></dt></dl></dd><dt><span class="sect1"><a href="#deviceInfos">Device Infos Resource</a></span></dt><dd><dl><dt><span class="sect2"><a href="#reportInfos">Report device information</a></span></dt></dl></dd><dt><span class="sect1"><a href="#history">Release History</a></span></dt><dd><dl><dt><span class="sect2"><a href="#v1">Version 1</a></span></dt></dl></dd></dl></div>
-  
+
 
   <div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
     <p>This document is available in English only. However, you can try to <a class="ulink" href="http://translate.google.com/translate?u=http%3A%2F%2Fcitysound.itm.uni-luebeck.de%2Fdocumentation.html">translate the page</a> with Google Translate.</p>
   </div>
 
   <div class="sect1" title="Introduction"><div class="titlepage"><div><div><h2 class="title"><a id="introduction"/>Introduction</h2></div></div></div>
-    
+
 
     <p>
       The <span class="emphasis"><em>Sound of the City</em></span> (SotC) project maintains a public database of geo-tagged noises and sound samples. With our <a class="ulink" href="http://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> API we are striving to achieve better access to the available data. We want other developers to participate in our project and build their own services on top of our media backend. The document at hand describes the usage of our REST interface and is intended to be a useful guide to cosume the data we serve.
@@ -233,7 +233,7 @@ $(document).ready(function() {
   </div>
 
   <div class="sect1" title="Resources"><div class="titlepage"><div><div><h2 class="title"><a id="resources"/>Resources</h2></div></div></div>
-    
+
 
     <p>
       Multiple REST resources can be accessed through the public SotC API. You can find a brief description of each resource below.
@@ -257,7 +257,7 @@ $(document).ready(function() {
   </div>
 
   <div class="sect1" title="Writing Access"><div class="titlepage"><div><div><h2 class="title"><a id="apiKeys"/>Writing Access</h2></div></div></div>
-    
+
 
     <p>
       You can query most REST resources without any registration. However, to prevent malicious use of the SotC API, you will need an API key to report noise levels, upload sound samples or report device information. Write access is not possible, unless your application was authenticated via its <span class="emphasis"><em>application name</em></span> and <span class="emphasis"><em>API key</em></span> before.
@@ -279,13 +279,13 @@ $(document).ready(function() {
   "NoiseLevelOrg": 0,
   "ReportedBy": "",
   "InPocket": 0,
-  <span class="bold"><strong>"AppName": "SotC Android App",
+  <span class="bold"><strong>"AppName": "Foobar App Name",
   "ApiKey": "62adf8ee76d4b497dd4df5de69ca9f83"</strong></span>
 }</pre>
   </div>
 
   <div class="sect1" title="Message Formats"><div class="titlepage"><div><div><h2 class="title"><a id="formats"/>Message Formats</h2></div></div></div>
-    
+
 
     <p>
       Input messages, i.e. the payload of POST requests, must always be encoded using JSON. On the output side, however, developers can choose between JSON, XML and HTML. This way we want to increase the ease of use and give you more flexibility on the client-side. To specify a response format other then JSON, please use the <code class="literal">format</code> URL argument.
@@ -313,7 +313,7 @@ $(document).ready(function() {
   </div>
 
   <div class="sect1" title="Getting Started"><div class="titlepage"><div><div><h2 class="title"><a id="gettingStarted"/>Getting Started</h2></div></div></div>
-    
+
 
     <p>
       REST is an architectural style based on the HTTP network protocol. The SotC API supports two different HTTP verbs, namely GET for reading requests and POST for writing requests. In the example below, you can see one of the simplest queries possible. The client is requesting the average noise level for the zip code area <code class="literal">23562</code>. Most of the HTTP headers are optional, the only mandatory one is <code class="literal">Content-Type</code>. It must always be set to <code class="literal">application/json</code>, because otherwise the service will raise an exception.
@@ -341,20 +341,20 @@ Accept: text/html, application/xml, application/json
   </div>
 
   <div class="sect1" title="Noise Levels Resource"><div class="titlepage"><div><div><h2 class="title"><a id="noiseLevels"/>Noise Levels Resource</h2></div></div></div>
-    
+
 
     <p>
       This resource handles all requests related to noise levels.
     </p>
 
     <div class="sect2" title="Get average noise level by geo coordinates"><div class="titlepage"><div><div><h3 class="title"><a id="averageGeo"/>Get average noise level by geo coordinates</h3></div></div></div>
-      
+
 
       <p>
         <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/<span class="bold"><strong>noiseLevels/average/?latitude=&lt;1&gt;&amp;longitude=&lt;2&gt;&amp;range=&lt;3&gt;</strong></span></span>
 
         </p><div class="sect3" title="Description"><div class="titlepage"><div><div><h4 class="title"><a id="idp115248"/>Description</h4></div></div></div>
-          
+
 
           <p>
             Get the average noise level of nearby area. The target location is specified by geo coordinates (latitude/longitude).
@@ -362,7 +362,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Arguments"><div class="titlepage"><div><div><h4 class="title"><a id="idp115976"/>Arguments</h4></div></div></div>
-          
+
 
           <p>
             </p><div class="variablelist"><dl><dt><span class="term">latitude</span></dt><dd>
@@ -382,7 +382,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Body Payload"><div class="titlepage"><div><div><h4 class="title"><a id="idp121400"/>Body Payload</h4></div></div></div>
-          
+
 
           <p>
             This is a GET request without body payload.
@@ -390,7 +390,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Return Message"><div class="titlepage"><div><div><h4 class="title"><a id="idp122136"/>Return Message</h4></div></div></div>
-          
+
 
           <p>
             The method will return a status code (e.g. <code class="literal">OK</code> or <code class="literal">Error</code>), a human-readable message and the average noise level for the area surrounding the desired geo coordinates. The noise level is an integer value. Its unit is dB.
@@ -398,7 +398,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Examples"><div class="titlepage"><div><div><h4 class="title"><a id="idp123800"/>Examples</h4></div></div></div>
-          
+
 
           <div class="caption"><p>Show JSON payload of REST response.</p></div>
           <pre class="programlisting">
@@ -420,7 +420,7 @@ Accept: text/html, application/xml, application/json
     </div>
 
     <div class="sect2" title="Get average noise level by zip code"><div class="titlepage"><div><div><h3 class="title"><a id="averageZip"/>Get average noise level by zip code</h3></div></div></div>
-      
+
 
       <p>
         <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/<span class="bold"><strong>noiseLevels/average/?zipCode=&lt;1&gt;</strong></span></span>
@@ -430,7 +430,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Description"><div class="titlepage"><div><div><h4 class="title"><a id="idp128416"/>Description</h4></div></div></div>
-          
+
 
           <p>
             Get average noise level of postcode area.
@@ -438,7 +438,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Arguments"><div class="titlepage"><div><div><h4 class="title"><a id="idp129152"/>Arguments</h4></div></div></div>
-          
+
 
           <p>
             </p><div class="variablelist"><dl><dt><span class="term">zipCode</span></dt><dd>
@@ -450,7 +450,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Body Payload"><div class="titlepage"><div><div><h4 class="title"><a id="idp131528"/>Body Payload</h4></div></div></div>
-          
+
 
           <p>
             This is a GET request without body payload.
@@ -458,7 +458,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Return Message"><div class="titlepage"><div><div><h4 class="title"><a id="idp132264"/>Return Message</h4></div></div></div>
-          
+
 
           <p>
             The method will return a status code (e.g. <code class="literal">OK</code> or <code class="literal">Error</code>), a human-readable message and the average noise level for the desired zip code area. The noise level is an integer value. Its unit is dB.
@@ -466,7 +466,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Examples"><div class="titlepage"><div><div><h4 class="title"><a id="idp133888"/>Examples</h4></div></div></div>
-          
+
 
           <div class="caption"><p>Show JSON payload of REST response.</p></div>
           <pre class="programlisting">
@@ -488,13 +488,13 @@ Accept: text/html, application/xml, application/json
     </div>
 
     <div class="sect2" title="List nearby noise levels"><div class="titlepage"><div><div><h3 class="title"><a id="listLevels"/>List nearby noise levels</h3></div></div></div>
-      
+
 
       <p>
         <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/<span class="bold"><strong>noiseLevels/list/?latitude=&lt;1&gt;&amp;longitude=&lt;2&gt;&amp;range=&lt;3&gt;</strong></span></span>
 
         </p><div class="sect3" title="Description"><div class="titlepage"><div><div><h4 class="title"><a id="idp137472"/>Description</h4></div></div></div>
-          
+
 
           <p>
             Get a list of noise levels that were recorded in the nearby area.
@@ -502,7 +502,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Arguments"><div class="titlepage"><div><div><h4 class="title"><a id="idp138208"/>Arguments</h4></div></div></div>
-          
+
 
           <p>
             </p><div class="variablelist"><dl><dt><span class="term">latitude</span></dt><dd>
@@ -522,7 +522,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Body Payload"><div class="titlepage"><div><div><h4 class="title"><a id="idp144272"/>Body Payload</h4></div></div></div>
-          
+
 
           <p>
             This is a GET request without body payload.
@@ -530,7 +530,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Return Message"><div class="titlepage"><div><div><h4 class="title"><a id="idp145008"/>Return Message</h4></div></div></div>
-          
+
 
           <p>
             The method will return a status code (e.g. <code class="literal">OK</code> or <code class="literal">Error</code>), a human-readable message, a list of noise levels (if any) and a result count (i.e. number of results returned).
@@ -538,7 +538,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Examples"><div class="titlepage"><div><div><h4 class="title"><a id="idp146624"/>Examples</h4></div></div></div>
-          
+
 
           <div class="caption"><p>Show JSON payload of REST response.</p></div>
           <pre class="programlisting">
@@ -606,13 +606,13 @@ Accept: text/html, application/xml, application/json
     </div>
 
     <div class="sect2" title="Report noise level"><div class="titlepage"><div><div><h3 class="title"><a id="reportLevel"/>Report noise level</h3></div></div></div>
-      
+
 
       <p>
         <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/<span class="bold"><strong>noiseLevels/report/?latitude=&lt;1&gt;&amp;longitude=&lt;2&gt;&amp;zipCode=&lt;3&gt;</strong></span></span>
 
         </p><div class="sect3" title="Description"><div class="titlepage"><div><div><h4 class="title"><a id="idp151080"/>Description</h4></div></div></div>
-          
+
 
           <p>
             Report noise level for the given location. The target area is specified by geo coordinates (latitude/longitude). The zip code parameter is optional.
@@ -620,7 +620,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Arguments"><div class="titlepage"><div><div><h4 class="title"><a id="idp151920"/>Arguments</h4></div></div></div>
-          
+
 
           <p>
             </p><div class="variablelist"><dl><dt><span class="term">latitude</span></dt><dd>
@@ -640,7 +640,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Body Payload"><div class="titlepage"><div><div><h4 class="title"><a id="idp158424"/>Body Payload</h4></div></div></div>
-          
+
 
           <p>
             This is a POST request with body payload. If you want to report noise levels, please use your <a class="ulink" href="documentation.html#apiKeys">API key for authentification</a>.
@@ -690,13 +690,13 @@ Accept: text/html, application/xml, application/json
   "NoiseLevelOrg": 0,
   "ReportedBy": "",
   "InPocket": 0,
-  "AppName": "SotC Android App",
+  "AppName": "Foobar App Name",
   "ApiKey": "62adf8ee76d4b497dd4df5de69ca9f83"
 }</pre>
         </div><p>
 
         </p><div class="sect3" title="Return Message"><div class="titlepage"><div><div><h4 class="title"><a id="idp172456"/>Return Message</h4></div></div></div>
-          
+
 
           <p>
             The method will return a status code (e.g. <code class="literal">OK</code> or <code class="literal">Error</code>) and a human-readable message.
@@ -704,7 +704,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Examples"><div class="titlepage"><div><div><h4 class="title"><a id="idp173848"/>Examples</h4></div></div></div>
-          
+
 
           <div class="caption"><p>Show JSON payload of REST response.</p></div>
           <pre class="programlisting">
@@ -725,20 +725,20 @@ Accept: text/html, application/xml, application/json
   </div>
 
   <div class="sect1" title="Sound Samples Resource"><div class="titlepage"><div><div><h2 class="title"><a id="soundSamples"/>Sound Samples Resource</h2></div></div></div>
-    
+
 
     <p>
       This resource handles all requests related to sound samples.
     </p>
 
     <div class="sect2" title="List nearby sound samples"><div class="titlepage"><div><div><h3 class="title"><a id="listSamples"/>List nearby sound samples</h3></div></div></div>
-      
+
 
       <p>
         <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/<span class="bold"><strong>soundSamples/list/?latitude=&lt;1&gt;&amp;longitude=&lt;2&gt;&amp;range=&lt;3&gt;</strong></span></span>
 
         </p><div class="sect3" title="Description"><div class="titlepage"><div><div><h4 class="title"><a id="idp178128"/>Description</h4></div></div></div>
-          
+
 
           <p>
             Get a list of sound samples that were recorded in the nearby area. The method will not return the sound samples themselves, but their metadata.
@@ -756,7 +756,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Arguments"><div class="titlepage"><div><div><h4 class="title"><a id="idp181696"/>Arguments</h4></div></div></div>
-          
+
 
           <p>
             </p><div class="variablelist"><dl><dt><span class="term">latitude</span></dt><dd>
@@ -776,7 +776,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Body Payload"><div class="titlepage"><div><div><h4 class="title"><a id="idp188088"/>Body Payload</h4></div></div></div>
-          
+
 
           <p>
             This is a GET request without body payload.
@@ -784,7 +784,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Return Message"><div class="titlepage"><div><div><h4 class="title"><a id="idp188824"/>Return Message</h4></div></div></div>
-          
+
 
           <p>
             The method will return a status code (e.g. <code class="literal">OK</code> or <code class="literal">Error</code>), a human-readable message, a list of sound samples (if any) and a result count (i.e. number of results returned).
@@ -792,7 +792,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Examples"><div class="titlepage"><div><div><h4 class="title"><a id="idp190224"/>Examples</h4></div></div></div>
-          
+
 
           <div class="caption"><p>Show JSON payload of REST response.</p></div>
           <pre class="programlisting">
@@ -866,13 +866,13 @@ Accept: text/html, application/xml, application/json
     </div>
 
     <div class="sect2" title="Upload sound sample"><div class="titlepage"><div><div><h3 class="title"><a id="uploadSample"/>Upload sound sample</h3></div></div></div>
-      
+
 
       <p>
         <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/<span class="bold"><strong>soundSamples/upload/?latitude=&lt;1&gt;&amp;longitude=&lt;2&gt;</strong></span></span>
 
         </p><div class="sect3" title="Description"><div class="titlepage"><div><div><h4 class="title"><a id="idp195240"/>Description</h4></div></div></div>
-          
+
 
           <p>
             Upload a sound sample to the server. The recording location is specified by geo coordinates (latitude/longitude).
@@ -880,7 +880,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Arguments"><div class="titlepage"><div><div><h4 class="title"><a id="idp196200"/>Arguments</h4></div></div></div>
-          
+
 
           <p>
             </p><div class="variablelist"><dl><dt><span class="term">latitude</span></dt><dd>
@@ -896,7 +896,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Body Payload"><div class="titlepage"><div><div><h4 class="title"><a id="idp201112"/>Body Payload</h4></div></div></div>
-          
+
 
           <p>
             This is a POST request with body payload. If you want to upload sound samples, please use your <a class="ulink" href="documentation.html#apiKeys">API key for authentification</a>.
@@ -951,13 +951,13 @@ Accept: text/html, application/xml, application/json
   "PayloadType": "mp3",
   <span class="bold"><strong>"Payload": "&lt;Base64-encoded Sound Sample&gt;",</strong></span>
   "ReportedBy": "",
-  "AppName": "SotC Android App",
+  "AppName": "Foobar App Name",
   "ApiKey": "62adf8ee76d4b497dd4df5de69ca9f83"
 }</pre>
         </div><p>
 
         </p><div class="sect3" title="Return Message"><div class="titlepage"><div><div><h4 class="title"><a id="idp216608"/>Return Message</h4></div></div></div>
-          
+
 
           <p>
             The method will return a status code (e.g. <code class="literal">OK</code> or <code class="literal">Error</code>), a human-readable message and an identifier for the newly uploaded sound sample.
@@ -965,7 +965,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Examples"><div class="titlepage"><div><div><h4 class="title"><a id="idp218136"/>Examples</h4></div></div></div>
-          
+
 
           <div class="caption"><p>Show JSON payload of REST response.</p></div>
           <pre class="programlisting">
@@ -988,20 +988,20 @@ Accept: text/html, application/xml, application/json
   </div>
 
   <div class="sect1" title="Device Infos Resource"><div class="titlepage"><div><div><h2 class="title"><a id="deviceInfos"/>Device Infos Resource</h2></div></div></div>
-    
+
 
     <p>
       This resource handles all requests related to device information.
     </p>
 
     <div class="sect2" title="Report device information"><div class="titlepage"><div><div><h3 class="title"><a id="reportInfos"/>Report device information</h3></div></div></div>
-      
+
 
       <p>
         <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/<span class="bold"><strong>deviceInfos/report/</strong></span></span>
 
         </p><div class="sect3" title="Description"><div class="titlepage"><div><div><h4 class="title"><a id="idp222080"/>Description</h4></div></div></div>
-          
+
 
           <p>
             Report device information. <span class="issue">This method is intended for internal use only.</span>
@@ -1009,7 +1009,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Arguments"><div class="titlepage"><div><div><h4 class="title"><a id="idp223752"/>Arguments</h4></div></div></div>
-          
+
 
           <p>
             This is a POST request without any URL arguments.
@@ -1017,7 +1017,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Body Payload"><div class="titlepage"><div><div><h4 class="title"><a id="idp224488"/>Body Payload</h4></div></div></div>
-          
+
 
           <p>
             This is a POST request with body payload. If you want to report device information, please use your <a class="ulink" href="documentation.html#apiKeys">API key for authentification</a>.
@@ -1062,13 +1062,13 @@ Accept: text/html, application/xml, application/json
   "APILevel": "10",
   "DeviceType": "GT-I9001",
   "ReportedBy": "",
-  "AppName": "SotC Android App",
+  "AppName": "Foobar App Name",
   "ApiKey": "62adf8ee76d4b497dd4df5de69ca9f83"
 }</pre>
         </div><p>
 
         </p><div class="sect3" title="Return Message"><div class="titlepage"><div><div><h4 class="title"><a id="idp236360"/>Return Message</h4></div></div></div>
-          
+
 
           <p>
             The method will return a status code (e.g. <code class="literal">OK</code> or <code class="literal">Error</code>) and a human-readable message.
@@ -1076,7 +1076,7 @@ Accept: text/html, application/xml, application/json
         </div><p>
 
         </p><div class="sect3" title="Examples"><div class="titlepage"><div><div><h4 class="title"><a id="idp237744"/>Examples</h4></div></div></div>
-          
+
 
           <div class="caption"><p>Show JSON payload of REST response.</p></div>
           <pre class="programlisting">
@@ -1097,10 +1097,10 @@ Accept: text/html, application/xml, application/json
   </div>
 
   <div class="sect1" title="Release History"><div class="titlepage"><div><div><h2 class="title"><a id="history"/>Release History</h2></div></div></div>
-    
+
 
     <div class="sect2" title="Version 1"><div class="titlepage"><div><div><h3 class="title"><a id="v1"/>Version 1</h3></div></div></div>
-      
+
 
       <p>
         Published on 2012-10-17.

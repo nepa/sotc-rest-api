@@ -110,7 +110,7 @@
   "NoiseLevelOrg": 0,
   "ReportedBy": "",
   "InPocket": 0,]]>
-  <emphasis role="bold">"AppName": "SotC Android App",
+  <emphasis role="bold">"AppName": "Foobar App Name",
   "ApiKey": "62adf8ee76d4b497dd4df5de69ca9f83"</emphasis>
 <![CDATA[}]]></programlisting>
   </sect1>
@@ -606,7 +606,7 @@ Accept: text/html, application/xml, application/json]]>
   "NoiseLevelOrg": 0,
   "ReportedBy": "",
   "InPocket": 0,
-  "AppName": "SotC Android App",
+  "AppName": "Foobar App Name",
   "ApiKey": "62adf8ee76d4b497dd4df5de69ca9f83"
 }]]></programlisting>
         </sect3>
@@ -932,7 +932,7 @@ Accept: text/html, application/xml, application/json]]>
   "PayloadType": "mp3",]]>
   <emphasis role="bold">"Payload": "&lt;Base64-encoded Sound Sample&gt;",</emphasis>
 <![CDATA[  "ReportedBy": "",
-  "AppName": "SotC Android App",
+  "AppName": "Foobar App Name",
   "ApiKey": "62adf8ee76d4b497dd4df5de69ca9f83"
 }]]></programlisting>
         </sect3>
@@ -1073,7 +1073,7 @@ Accept: text/html, application/xml, application/json]]>
   "APILevel": "10",
   "DeviceType": "GT-I9001",
   "ReportedBy": "",
-  "AppName": "SotC Android App",
+  "AppName": "Foobar App Name",
   "ApiKey": "62adf8ee76d4b497dd4df5de69ca9f83"
 }]]></programlisting>
         </sect3>
