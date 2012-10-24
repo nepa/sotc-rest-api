@@ -1,3 +1,6 @@
+Order Allow,Deny
+Allow from all
+
 RewriteEngine On
 # TODO: Set path to REST API
 # On live server: /rest/v1/
@@ -6,3 +9,9 @@ RewriteBase /sotc-rest-api/src/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php/$1 [L]
+
+# TODO: Force HTTPS for all requests (optional)
+# Redirect all HTTP requests to HTTPS
+#RewriteCond %{HTTPS} off
+#RewriteCond %{REQUEST_URI} ^/rest/.*$
+#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI}$1 [R=301,L]
