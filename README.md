@@ -64,7 +64,7 @@ When you are running the SotC REST API in a live environment, you should finally
 
 ### Authentication
 
-Reading access to the REST interface is not limited by and means. Writing access is forbidden, unless the client provides a valid API key in the POST request. Credentials for client authentication, namely a pair of _application name_ and _API key_, are stored in their own database table. The `Authentication` class, which is part of the Server-One code base, will take care of API key generation and validation of authentication data.
+Reading access to the REST interface is not limited by any means. Writing access is forbidden, unless the client provides a valid API key in the POST request. Credentials for client authentication, namely a pair of _application name_ and _API key_, are stored in their own database table. The `Authentication` class, which is part of the Server-One code base, will take care of API key generation and validation of authentication data.
 
 API keys are assigned on a per-application basis, not per user. Credentials must be passed in the body of a POST request, in order to authenticate the client. If no valid key is provided, the SotC REST API will issue an error message.
 
