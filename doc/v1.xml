@@ -9,7 +9,7 @@
   <articleinfo>
     <title>Sound of the City REST API</title>
 
-    <pubdate>Documentation for API v1. Last update on <?dbtimestamp format="Y-m-d"?>.</pubdate>
+    <pubdate>Documentation for API v1.1. Last update on <?dbtimestamp format="Y-m-d"?>.</pubdate>
 
     <author>
       <honorific>Dipl.-Inform. (FH)</honorific>
@@ -1109,6 +1109,18 @@ Accept: text/html, application/xml, application/json]]>
 
   <sect1 id="history">
     <title>Release History</title>
+
+    <sect2 id="v1">
+      <title>Version 1.1</title>
+
+      <para>
+        Published on 2012-xx-xx.
+      </para>
+
+      <itemizedlist>
+        <listitem><para>Fixed problem with German umlauts.</para></listitem>
+      </itemizedlist>
+    </sect2>
 
     <sect2 id="v1">
       <title>Version 1</title>

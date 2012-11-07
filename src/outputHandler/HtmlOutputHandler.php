@@ -23,8 +23,11 @@ class HtmlOutputHandler extends BaseOutputHandler
    */
   public function render($data)
   {
+    // Encode data with UTF-8
+    $this->utf8Values($data);
+
     // Send HTTP header and HTML payload
-    header('Content-Type: text/html; charset=utf8');
+    header('Content-Type: text/html; charset=utf-8');
 
     $this->printHTMLHeader();
     $this->printArray($data);

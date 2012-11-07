@@ -20,8 +20,11 @@ class XmlOutputHandler extends BaseOutputHandler
    */
   public function render($data)
   {
+    // Encode data with UTF-8
+    $this->utf8Values($data);
+
     // Send HTTP header and XML payload
-    header('Content-Type: text/xml; charset=utf8');
+    header('Content-Type: text/xml; charset=utf-8');
 
     $this->printXML($data);
   }

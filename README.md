@@ -94,6 +94,9 @@ A more comprehensive documentation for end-users will be available on the [Sound
 
 ## History
 
+  * **Version 1.1:**
+    * Fixed encoding problem with UTF-8 characters.
+
   * **Version 1:**
     * Basic implementation of dispatcher, resource controllers and output handlers
     * REST interface is compatible to Server-One's initial SOAP interface

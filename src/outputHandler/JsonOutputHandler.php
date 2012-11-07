@@ -20,8 +20,11 @@ class JsonOutputHandler extends BaseOutputHandler
    */
   public function render($data)
   {
+    // Encode data with UTF-8
+    $this->utf8Values($data);
+
     // Send HTTP header and JSON payload
-    header('Content-Type: application/json; charset=utf8');
+    header('Content-Type: application/json; charset=utf-8');
 
     echo json_encode($data, JSON_FORCE_OBJECT);
   }
