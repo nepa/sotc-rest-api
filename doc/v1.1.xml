@@ -9,7 +9,7 @@
   <articleinfo>
     <title>Sound of the City REST API</title>
 
-    <pubdate>Documentation for API v1. Last update on <?dbtimestamp format="Y-m-d"?>.</pubdate>
+    <pubdate>Documentation for API v1.1. Last update on <?dbtimestamp format="Y-m-d"?>.</pubdate>
 
     <author>
       <honorific>Dipl.-Inform. (FH)</honorific>
@@ -737,6 +737,7 @@ Accept: text/html, application/xml, application/json]]>
       "Title": "Construction site",
       "Timestamp": "1349964015",
       "Description": "Drill on a construction site.",
+      "Tag": "construction",
       "SampleID": "1ceb8089e7441732e10866019101e44f"
     },
     "1": {
@@ -745,6 +746,7 @@ Accept: text/html, application/xml, application/json]]>
       "Title": "Car sound",
       "Timestamp": "1350092454",
       "Description": "A Ferrari in the city.",
+      "Tag": "car",
       "SampleID": "b64f3dbd20329d9af01ff21eed64ff0c"
     },
     "2": {
@@ -753,6 +755,7 @@ Accept: text/html, application/xml, application/json]]>
       "Title": "Ducks",
       "Timestamp": "1350082846",
       "Description": "A group of ducks in the city park.",
+      "Tag": "nature",
       "SampleID": "5851478d17719a6beaf3eeeff03d6a46"
     }
   },
@@ -771,6 +774,7 @@ Accept: text/html, application/xml, application/json]]>
       <Title>Construction site</Title>
       <Timestamp>1349964015</Timestamp>
       <Description>Drill on a construction site.</Description>
+      <Tag>construction</Tag>
       <SampleID>1ceb8089e7441732e10866019101e44f</SampleID>
     </Item>
     <Item>
@@ -779,6 +783,7 @@ Accept: text/html, application/xml, application/json]]>
       <Title>Car sound</Title>
       <Timestamp>1350092454</Timestamp>
       <Description>A Ferrari in the city.</Description>
+      <Tag>car</Tag>
       <SampleID>b64f3dbd20329d9af01ff21eed64ff0c</SampleID>
     </Item>
     <Item>
@@ -787,6 +792,7 @@ Accept: text/html, application/xml, application/json]]>
       <Title>Ducks</Title>
       <Timestamp>1350092454</Timestamp>
       <Description>A group of ducks in the city park.</Description>
+      <Tag>nature</Tag>
       <SampleID>b64f3dbd20329d9af01ff21eed64ff0c</SampleID>
     </Item>
   </SampleData>
@@ -873,6 +879,15 @@ Accept: text/html, application/xml, application/json]]>
               </varlistentry>
 
               <varlistentry>
+                <term>Tag</term>
+                <listitem>
+                  <para>
+                    Descriptive tag for content of sound sample. String value. Either one of <literal>car</literal>, <literal>train</literal>, <literal>people</literal>, <literal>nature</literal>, <literal>music</literal>, <literal>plane</literal>, <literal>construction</literal>, <literal>church</literal>, <literal>ship</literal> or <literal>other</literal>.</emphasis>
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
                 <term>PayloadType</term>
                 <listitem>
                   <para>
@@ -928,6 +943,7 @@ Accept: text/html, application/xml, application/json]]>
 {
   "Title": "Church bell",
   "Time": "1350164562",
+  "Tag": "church",
   "Description": "Hear the church bells ring.",
   "PayloadType": "mp3",]]>
   <emphasis role="bold">"Payload": "&lt;Base64-encoded Sound Sample&gt;",</emphasis>
@@ -1109,6 +1125,19 @@ Accept: text/html, application/xml, application/json]]>
 
   <sect1 id="history">
     <title>Release History</title>
+
+    <sect2 id="v1.1">
+      <title>Version 1.1</title>
+
+      <para>
+        Published on 2012-xx-xx.
+      </para>
+
+      <itemizedlist>
+        <listitem><para>Fixed problem with German umlauts.</para></listitem>
+        <listitem><para>Added new argument <literal>tag</literal> to sound sample methods.</para></listitem>
+      </itemizedlist>
+    </sect2>
 
     <sect2 id="v1">
       <title>Version 1</title>

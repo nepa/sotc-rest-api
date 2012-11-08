@@ -125,7 +125,8 @@ class SoundSamplesController extends BaseController
     {
       // Upload sound sample
       if (isset($arguments['latitude']) && isset($arguments['longitude']) && isset($bodyData['Time']) &&
-          isset($bodyData['PayloadType']) && isset($bodyData['Payload']) && isset($bodyData['ReportedBy']))
+          isset($bodyData['Tag']) && isset($bodyData['PayloadType']) && isset($bodyData['Payload']) &&
+          isset($bodyData['ReportedBy']))
       {
         // Prevent PHP notice because of undefined index
         if (!isset($bodyData['Title']))
@@ -143,6 +144,7 @@ class SoundSamplesController extends BaseController
                     $bodyData['Title'],
                     $bodyData['Time'],
                     $bodyData['Description'],
+                    $bodyData['Tag'],
                     $bodyData['PayloadType'],
                     $bodyData['Payload'],
                     $bodyData['ReportedBy']);

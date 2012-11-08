@@ -129,6 +129,7 @@ EOT;
     $title = 'Some title.';
     $timestamp = time();
     $desc = 'Some description.';
+    $tag = 'car';
     $payloadType = 'mp3';
     $payload = 'xxx';
     $reportedBy = 'Foobar';
@@ -141,6 +142,7 @@ EOT;
   "Title": "$title",
   "Time": "$timestamp",
   "Description": "$desc",
+  "Tag": "$tag",
   "PayloadType": "$payloadType",
   "Payload": "$payload",
   "ReportedBy": "$reportedBy",
