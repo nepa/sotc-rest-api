@@ -94,6 +94,9 @@ A more comprehensive documentation for end-users will be available on the [Sound
 
 ## History
 
+  * **Version 1.2:**
+    * Added new REST resource for use statistics.
+
   * **Version 1.1:**
     * Fixed encoding problem with UTF-8 characters.
     * Added new argument for tagging of sound samples.

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-  <!ENTITY BASE_URL "https://citysound.itm.uni-luebeck.de/rest/v1/">
+  <!ENTITY BASE_URL "https://citysound.itm.uni-luebeck.de/rest/v1.2/">
   <!ENTITY DOWNLOAD_URL "http://citysound.itm.uni-luebeck.de/s1/download.php?sid=">
 ]>
 
@@ -9,7 +9,7 @@
   <articleinfo>
     <title>Sound of the City REST API</title>
 
-    <pubdate>Documentation for API v1.1. Last update on <?dbtimestamp format="Y-m-d"?>.</pubdate>
+    <pubdate>Documentation for API v1.2. Last update on <?dbtimestamp format="Y-m-d"?>.</pubdate>
 
     <author>
       <honorific>Dipl.-Inform. (FH)</honorific>
@@ -20,6 +20,7 @@
     <copyright>
       <year>2011</year>
       <year>2012</year>
+      <year>2013</year>
       <holder>Institute of Telematics</holder>
     </copyright>
 
@@ -81,6 +82,14 @@
             <para>
               This REST resource will handle all requests related to device information. Admittedly, this resource is not of great value for most users. It can be used to report information about mobile clients and is mainly intended for internal purposes (i.e. to improve compatibility).
             </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>useStats</term>
+          <listitem>
+            <para>
+              This REST resource will handle all requests related to use statistics. It can return accumulated data about the service use, such as total number of noise level reports or sound sample uploads. Results can be filtered by predefined periods or custom time frames.
           </listitem>
         </varlistentry>
       </variablelist>
@@ -882,7 +891,7 @@ Accept: text/html, application/xml, application/json]]>
                 <term>Tag</term>
                 <listitem>
                   <para>
-                    Descriptive tag for content of sound sample. String value. Either one of <literal>car</literal>, <literal>train</literal>, <literal>people</literal>, <literal>nature</literal>, <literal>music</literal>, <literal>plane</literal>, <literal>construction</literal>, <literal>church</literal>, <literal>ship</literal> or <literal>other</literal>.</emphasis>
+                    Descriptive tag for content of sound sample. String value. Either one of <literal>car</literal>, <literal>train</literal>, <literal>people</literal>, <literal>nature</literal>, <literal>music</literal>, <literal>plane</literal>, <literal>construction</literal>, <literal>church</literal>, <literal>ship</literal> or <literal>other</literal>.
                   </para>
                 </listitem>
               </varlistentry>
@@ -1123,14 +1132,138 @@ Accept: text/html, application/xml, application/json]]>
     </sect2>
   </sect1>
 
+  <sect1 id="useStats">
+    <title>Use Statistics Resource</title>
+
+    <para>
+      This resource handles all requests related to use statistics.
+    </para>
+
+    <sect2 id="countEvents">
+      <title>Count number of events</title>
+
+      <para>
+        <emphasis role="rest-url">&BASE_URL;<emphasis role="bold">useStats/count/?what=&lt;1&gt;&amp;when=&lt;2&gt;&amp;from=&lt;3&gt;&amp;to=&lt;4&gt;</emphasis></emphasis>
+
+        <sect3>
+          <title>Description</title>
+
+          <para>
+            Count total number of events (e.g. reports or downloads) in a certain period of time. Content type <literal>appDownloads</literal> cannot be filtered by time frame (defaults to <literal>ever</literal>).
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Arguments</title>
+
+          <para>
+            <variablelist>
+              <varlistentry>
+                <term>what</term>
+                <listitem>
+                  <para>
+                    Content type of event. String value. Either one of <literal>noiseLevels</literal>, <literal>soundSamples</literal>, <literal>deviceInfos</literal>, <literal>uniqueUsers</literal> or <literal>appDownloads</literal>.
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>when</term>
+                <listitem>
+                  <para>
+                    Time period for result filtering. String value. Either one of <literal>today</literal>, <literal>yesterday</literal>, <literal>last-week</literal>, <literal>last-month</literal>, <literal>last-year</literal>, <literal>from-to</literal> or <literal>ever</literal>. <emphasis>This parameter is optional.</emphasis>
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>from</term>
+                <listitem>
+                  <para>
+                    Start of time frame. UNIX timestamp. Will only be evaluated, if <literal>when</literal> parameter is set to <literal>from-to</literal>. <emphasis>This parameter is optional.</emphasis>
+                  </para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>to</term>
+                <listitem>
+                  <para>
+                    End of time frame. UNIX timestamp. Will only be evaluated, if <literal>when</literal> parameter is set to <literal>from-to</literal>. <emphasis>This parameter is optional.</emphasis>
+                  </para>
+                </listitem>
+              </varlistentry>
+            </variablelist>
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Body Payload</title>
+
+          <para>
+            This is a GET request without body payload.
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Return Message</title>
+
+          <para>
+            The method will return a status code (e.g. <literal>OK</literal> or <literal>Error</literal>), a human-readable message and accumulated use data. The use statistics contain content type of event, desired time period and total number of events.
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Examples</title>
+
+          <caption><para>Show JSON payload of REST response.</para></caption>
+          <programlisting><![CDATA[
+{
+  "Statuscode": "OK",
+  "Message": "Use statistics queried successfully.",
+  "UseStatistics": {
+    "ContentType": "noiseLevels",
+    "TimePeriod": "last-month",
+    "ReportsCounter": "112"
+  }
+}]]></programlisting>
+
+          <caption><para>Show XML payload of REST response.</para></caption>
+          <programlisting><![CDATA[
+<Response>
+  <Statuscode>OK</Statuscode>
+  <Message>Use statistics queried successfully.</Message>
+  <UseStatistics>
+    <ContentType>noiseLevels</ContentType>
+    <TimePeriod>last-month</TimePeriod>
+    <ReportsCounter>112</ReportsCounter>
+  </UseStatistics>
+</Response>]]></programlisting>
+        </sect3>
+      </para>
+    </sect2>
+  </sect1>
+
   <sect1 id="history">
     <title>Release History</title>
+
+    <sect2 id="v1.2">
+      <title>Version 1.2</title>
+
+      <para>
+        Published on 2013-02-03.
+      </para>
+
+      <itemizedlist>
+        <listitem><para>Added new REST resource for use statistics.</para></listitem>
+      </itemizedlist>
+    </sect2>
 
     <sect2 id="v1.1">
       <title>Version 1.1</title>
 
       <para>
-        Published on 2012-xx-xx.
+        Published on 2012-11-19.
       </para>
 
       <itemizedlist>

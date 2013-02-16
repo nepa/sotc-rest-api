@@ -188,6 +188,39 @@ EOT;
   }
 
   /**
+   * Test querying of use statistics.
+   */
+  public function testUseStatistics()
+  {
+    $whats = array('noiseLevels', 'soundSamples', 'deviceInfos', 'uniqueUsers', 'appDownloads');
+    $whens = array('today', 'yesterday', 'last-week', 'last-month', 'last-year', 'from-to', 'ever');
+
+    foreach ($whats as $what)
+    {
+      foreach ($whens as $when)
+      {
+        $query = 'useStats/count/?what=' . $what . '&when=' . $when;
+
+        // Append UNIX timestamps
+        if ($what == 'from-to')
+        {
+          $from = 0;
+          $to = time();
+          $query .= '&from=' . $from . '&to=' . $to;
+        }
+
+        $response = self::doGETRequest($query);
+        $this->assertTrue(!empty($response), 'REST response must not be empty.');
+
+        $this->assertEqual($response['Statuscode'], 'OK', 'Status code must be \'OK\'.');
+        $this->assertTrue(is_array($response['UseStatistics']), 'Use statistics must be returned as a collection.');
+        $this->assertTrue(is_numeric($response['UseStatistics']['ReportsCounter']), 'Returned number of events must be numerical.');
+        $this->assertFalse($response['UseStatistics']['ReportsCounter'] < 0, 'Returned number of events must not be negative.');
+      }
+    }
+  }
+
+  /**
    * Private helper method to send GET requests via REST.
    *
    * \param $resource Resource query string for REST request
