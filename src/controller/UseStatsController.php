@@ -32,6 +32,11 @@ class UseStatsController extends BaseController
     {
       $result = $this->getNumberOfReports($request);
     }
+    // Return summary of use statistics
+    else if ($request->getSubRessourcePath() == 'summary')
+    {
+      $result = $this->getStatisticsSummary($request);
+    }
     else
     {
       $result = array(
@@ -85,6 +90,38 @@ class UseStatsController extends BaseController
                   $arguments['when'],
                   $arguments['from'],
                   $arguments['to']);
+
+      // Capitalize first letter of all array keys
+      Utility::ucfirstKeys($result);
+    }
+    else
+    {
+      $result = array(
+                  'Statuscode' => 'Error',
+                  'Message' => 'Invalid or no arguments in REST request.');
+    }
+
+    return $result;
+  }
+
+  /**
+   * Evaluate REST request and return a summary of the service's
+   * use statistics for desired content type (e.g. noise level
+   * reports or sound sample uploads).
+   *
+   * \param $request REST request from client
+   *
+   * \return Array with response data
+   */
+  private function getStatisticsSummary($request)
+  {
+    $result = array();
+    $arguments = $request->getURLArguments();
+
+    // Summarize use statistics
+    if (isset($arguments['what']))
+    {
+      $result = MediaServer::handleStatisticsSummaryRequest($arguments['what']);
 
       // Capitalize first letter of all array keys
       Utility::ucfirstKeys($result);
