@@ -221,6 +221,43 @@ EOT;
   }
 
   /**
+   * Test querying of statistics summary.
+   */
+  public function testStatisticsSummary()
+  {
+    $whats = array('noiseLevels', 'soundSamples', 'deviceInfos', 'uniqueUsers', 'appDownloads');
+
+    foreach ($whats as $what)
+    {
+      $query = 'useStats/summary/?what=' . $what;
+
+      $response = self::doGETRequest($query);
+      $this->assertTrue(!empty($response), 'REST response must not be empty.');
+
+      $this->assertEqual($response['Statuscode'], 'OK', 'Status code must be \'OK\'.');
+      $this->assertTrue(is_array($response['StatisticsSummary']), 'Statistics summary must be returned as a collection.');
+
+      // Test reports for current day
+      for ($i = 0; $i < count($response['StatisticsSummary']['SummaryData']['Today']); $i++)
+      {
+        $reportsCounter = $response['StatisticsSummary']['SummaryData']['Today'][$i]['ReportsCounter'];
+
+        $this->assertTrue(is_numeric($reportsCounter), 'Returned number of events per hour must be numerical.');
+        $this->assertFalse($reportsCounter < 0, 'Returned number of events per hour must not be negative.');
+      }
+
+      // Test reports for last twelve months
+      for ($i = 0; $i < count($response['StatisticsSummary']['SummaryData']['LastMonths']); $i++)
+      {
+        $reportsCounter = $response['StatisticsSummary']['SummaryData']['LastMonths'][$i]['ReportsCounter'];
+
+        $this->assertTrue(is_numeric($reportsCounter), 'Returned number of events per month must be numerical.');
+        $this->assertFalse($reportsCounter < 0, 'Returned number of events per month must not be negative.');
+      }
+    }
+  }
+
+  /**
    * Private helper method to send GET requests via REST.
    *
    * \param $resource Resource query string for REST request

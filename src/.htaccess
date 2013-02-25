@@ -3,7 +3,7 @@ Allow from all
 
 RewriteEngine On
 # TODO: Set path to REST API
-# On live server: /rest/v1/
+# On live server: /rest/v1.3/
 RewriteBase /sotc-rest-api/src/
 
 RewriteCond %{REQUEST_FILENAME} !-f
