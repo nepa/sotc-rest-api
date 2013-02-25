@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-  <!ENTITY BASE_URL "https://citysound.itm.uni-luebeck.de/rest/v1/">
+  <!ENTITY BASE_URL "https://citysound.itm.uni-luebeck.de/rest/v1.1/">
   <!ENTITY DOWNLOAD_URL "http://citysound.itm.uni-luebeck.de/s1/download.php?sid=">
 ]>
 
@@ -882,7 +882,7 @@ Accept: text/html, application/xml, application/json]]>
                 <term>Tag</term>
                 <listitem>
                   <para>
-                    Descriptive tag for content of sound sample. String value. Either one of <literal>car</literal>, <literal>train</literal>, <literal>people</literal>, <literal>nature</literal>, <literal>music</literal>, <literal>plane</literal>, <literal>construction</literal>, <literal>church</literal>, <literal>ship</literal> or <literal>other</literal>.</emphasis>
+                    Descriptive tag for content of sound sample. String value. Either one of <literal>car</literal>, <literal>train</literal>, <literal>people</literal>, <literal>nature</literal>, <literal>music</literal>, <literal>plane</literal>, <literal>construction</literal>, <literal>church</literal>, <literal>ship</literal> or <literal>other</literal>.
                   </para>
                 </listitem>
               </varlistentry>

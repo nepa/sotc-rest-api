@@ -208,17 +208,17 @@ $(document).ready(function() {
    </div>
    <br />
    <br />
-   <!-- BEGIN OF DOCUMENTATION --><div xmlns="http://www.w3.org/1999/xhtml" class="article" title="Sound of the City REST API"><div class="titlepage"><div><div><h2 class="title"><a id="idp104"/>Sound of the City REST API</h2></div><div><div class="author"><h3 class="author"><span class="honorific">Dipl.-Inform. (FH)</span> <span class="firstname">Sascha</span> <span class="surname">Seidel</span></h3></div></div><div><p class="copyright">Copyright © 2011, 2012 Institute of Telematics</p></div><div><div class="legalnotice" title="Legal Notice"><a id="idp21080"/>
+   <!-- BEGIN OF DOCUMENTATION --><div xmlns="http://www.w3.org/1999/xhtml" class="article" title="Sound of the City REST API"><div class="titlepage"><div><div><h2 class="title"><a id="idp104"/>Sound of the City REST API</h2></div><div><div class="author"><h3 class="author"><span class="honorific">Dipl.-Inform. (FH)</span> <span class="firstname">Sascha</span> <span class="surname">Seidel</span></h3></div></div><div><p class="copyright">Copyright © 2011, 2012, 2013 Institute of Telematics</p></div><div><div class="legalnotice" title="Legal Notice"><a id="idp14544"/>
       <p>This work is licensed under the Creative Commons Attribution 3.0 Unported License.</p>
-    </div></div><div><p class="pubdate">Documentation for API v1. Last update on 2012-10-22.</p></div></div><hr/></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#introduction">Introduction</a></span></dt><dt><span class="sect1"><a href="#resources">Resources</a></span></dt><dt><span class="sect1"><a href="#apiKeys">Writing Access</a></span></dt><dt><span class="sect1"><a href="#formats">Message Formats</a></span></dt><dt><span class="sect1"><a href="#gettingStarted">Getting Started</a></span></dt><dt><span class="sect1"><a href="#noiseLevels">Noise Levels Resource</a></span></dt><dd><dl><dt><span class="sect2"><a href="#averageGeo">Get average noise level by geo coordinates</a></span></dt><dt><span class="sect2"><a href="#averageZip">Get average noise level by zip code</a></span></dt><dt><span class="sect2"><a href="#listLevels">List nearby noise levels</a></span></dt><dt><span class="sect2"><a href="#reportLevel">Report noise level</a></span></dt></dl></dd><dt><span class="sect1"><a href="#soundSamples">Sound Samples Resource</a></span></dt><dd><dl><dt><span class="sect2"><a href="#listSamples">List nearby sound samples</a></span></dt><dt><span class="sect2"><a href="#uploadSample">Upload sound sample</a></span></dt></dl></dd><dt><span class="sect1"><a href="#deviceInfos">Device Infos Resource</a></span></dt><dd><dl><dt><span class="sect2"><a href="#reportInfos">Report device information</a></span></dt></dl></dd><dt><span class="sect1"><a href="#history">Release History</a></span></dt><dd><dl><dt><span class="sect2"><a href="#v1">Version 1</a></span></dt></dl></dd></dl></div>
-
+    </div></div><div><p class="pubdate">Documentation for API v1.3. Last update on 2013-02-25.</p></div></div><hr/></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#introduction">Introduction</a></span></dt><dt><span class="sect1"><a href="#resources">Resources</a></span></dt><dt><span class="sect1"><a href="#apiKeys">Writing Access</a></span></dt><dt><span class="sect1"><a href="#formats">Message Formats</a></span></dt><dt><span class="sect1"><a href="#gettingStarted">Getting Started</a></span></dt><dt><span class="sect1"><a href="#noiseLevels">Noise Levels Resource</a></span></dt><dd><dl><dt><span class="sect2"><a href="#averageGeo">Get average noise level by geo coordinates</a></span></dt><dt><span class="sect2"><a href="#averageZip">Get average noise level by zip code</a></span></dt><dt><span class="sect2"><a href="#listLevels">List nearby noise levels</a></span></dt><dt><span class="sect2"><a href="#reportLevel">Report noise level</a></span></dt></dl></dd><dt><span class="sect1"><a href="#soundSamples">Sound Samples Resource</a></span></dt><dd><dl><dt><span class="sect2"><a href="#listSamples">List nearby sound samples</a></span></dt><dt><span class="sect2"><a href="#uploadSample">Upload sound sample</a></span></dt></dl></dd><dt><span class="sect1"><a href="#deviceInfos">Device Infos Resource</a></span></dt><dd><dl><dt><span class="sect2"><a href="#reportInfos">Report device information</a></span></dt></dl></dd><dt><span class="sect1"><a href="#useStats">Use Statistics Resource</a></span></dt><dd><dl><dt><span class="sect2"><a href="#countEvents">Count number of events</a></span></dt><dt><span class="sect2"><a href="#summarizeStatistics">Summarize use statistics</a></span></dt></dl></dd><dt><span class="sect1"><a href="#history">Release History</a></span></dt><dd><dl><dt><span class="sect2"><a href="#v1.3">Version 1.3</a></span></dt><dt><span class="sect2"><a href="#v1.2">Version 1.2</a></span></dt><dt><span class="sect2"><a href="#v1.1">Version 1.1</a></span></dt><dt><span class="sect2"><a href="#v1">Version 1</a></span></dt></dl></dd></dl></div>
+  
 
   <div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
     <p>This document is available in English only. However, you can try to <a class="ulink" href="http://translate.google.com/translate?u=http%3A%2F%2Fcitysound.itm.uni-luebeck.de%2Fdocumentation.html">translate the page</a> with Google Translate.</p>
   </div>
 
   <div class="sect1" title="Introduction"><div class="titlepage"><div><div><h2 class="title"><a id="introduction"/>Introduction</h2></div></div></div>
-
+    
 
     <p>
       The <span class="emphasis"><em>Sound of the City</em></span> (SotC) project maintains a public database of geo-tagged noises and sound samples. With our <a class="ulink" href="http://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> API we are striving to achieve better access to the available data. We want other developers to participate in our project and build their own services on top of our media backend. The document at hand describes the usage of our REST interface and is intended to be a useful guide to cosume the data we serve.
@@ -234,7 +234,7 @@ $(document).ready(function() {
   </div>
 
   <div class="sect1" title="Resources"><div class="titlepage"><div><div><h2 class="title"><a id="resources"/>Resources</h2></div></div></div>
-
+    
 
     <p>
       Multiple REST resources can be accessed through the public SotC API. You can find a brief description of each resource below.
@@ -253,12 +253,16 @@ $(document).ready(function() {
             <p>
               This REST resource will handle all requests related to device information. Admittedly, this resource is not of great value for most users. It can be used to report information about mobile clients and is mainly intended for internal purposes (i.e. to improve compatibility).
             </p>
+          </dd><dt><span class="term">useStats</span></dt><dd>
+            <p>
+              This REST resource will handle all requests related to use statistics. It can return accumulated data about the service use, such as total number of noise level reports or sound sample uploads. Results can be filtered by predefined periods or custom time frames.
+            </p>
           </dd></dl></div><p>
     </p>
   </div>
 
   <div class="sect1" title="Writing Access"><div class="titlepage"><div><div><h2 class="title"><a id="apiKeys"/>Writing Access</h2></div></div></div>
-
+    
 
     <p>
       You can query most REST resources without any registration. However, to prevent malicious use of the SotC API, you will need an API key to report noise levels, upload sound samples or report device information. Write access is not possible, unless your application was authenticated via its <span class="emphasis"><em>application name</em></span> and <span class="emphasis"><em>API key</em></span> before.
@@ -286,7 +290,7 @@ $(document).ready(function() {
   </div>
 
   <div class="sect1" title="Message Formats"><div class="titlepage"><div><div><h2 class="title"><a id="formats"/>Message Formats</h2></div></div></div>
-
+    
 
     <p>
       Input messages, i.e. the payload of POST requests, must always be encoded using JSON. On the output side, however, developers can choose between JSON, XML and HTML. This way we want to increase the ease of use and give you more flexibility on the client-side. To specify a response format other then JSON, please use the <code class="literal">format</code> URL argument.
@@ -295,26 +299,26 @@ $(document).ready(function() {
     <p>
       The default output format is JSON. If you do not specify any format explicitly, JSON will be used automatically. Despite that, you can also set the <code class="literal">format</code> parameter to <code class="literal">json</code> manually:
 
-      <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/v1/noiseLevels/average/?<span class="bold"><strong>format=json</strong></span>&amp;zipCode=23562</span>
+      <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/v1.3/noiseLevels/average/?<span class="bold"><strong>format=json</strong></span>&amp;zipCode=23562</span>
     </p>
 
     <p>
       For XML-encoded response messages, set the <code class="literal">format</code> URL parameter to <code class="literal">xml</code>:
 
-      <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/v1/noiseLevels/average/?<span class="bold"><strong>format=xml</strong></span>&amp;zipCode=23562</span>
+      <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/v1.3/noiseLevels/average/?<span class="bold"><strong>format=xml</strong></span>&amp;zipCode=23562</span>
     </p>
 
     <p>
       Another possible output format is HTML. The response data will be rendered as an unordered list, if you set the <code class="literal">format</code> value to <code class="literal">html</code>:
 
-      <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/v1/noiseLevels/average/?<span class="bold"><strong>format=html</strong></span>&amp;zipCode=23562</span>
+      <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/v1.3/noiseLevels/average/?<span class="bold"><strong>format=html</strong></span>&amp;zipCode=23562</span>
 
       The intended use of this option is debugging. In our opinion, the HTML output is not suitable to process the data any further.
     </p>
   </div>
 
   <div class="sect1" title="Getting Started"><div class="titlepage"><div><div><h2 class="title"><a id="gettingStarted"/>Getting Started</h2></div></div></div>
-
+    
 
     <p>
       REST is an architectural style based on the HTTP network protocol. The SotC API supports two different HTTP verbs, namely GET for reading requests and POST for writing requests. In the example below, you can see one of the simplest queries possible. The client is requesting the average noise level for the zip code area <code class="literal">23562</code>. Most of the HTTP headers are optional, the only mandatory one is <code class="literal">Content-Type</code>. It must always be set to <code class="literal">application/json</code>, because otherwise the service will raise an exception.
@@ -342,28 +346,28 @@ Accept: text/html, application/xml, application/json
   </div>
 
   <div class="sect1" title="Noise Levels Resource"><div class="titlepage"><div><div><h2 class="title"><a id="noiseLevels"/>Noise Levels Resource</h2></div></div></div>
-
+    
 
     <p>
       This resource handles all requests related to noise levels.
     </p>
 
     <div class="sect2" title="Get average noise level by geo coordinates"><div class="titlepage"><div><div><h3 class="title"><a id="averageGeo"/>Get average noise level by geo coordinates</h3></div></div></div>
-
+      
 
       <p>
-        <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/v1/<span class="bold"><strong>noiseLevels/average/?latitude=&lt;1&gt;&amp;longitude=&lt;2&gt;&amp;range=&lt;3&gt;</strong></span></span>
+        <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/v1.3/<span class="bold"><strong>noiseLevels/average/?latitude=&lt;1&gt;&amp;longitude=&lt;2&gt;&amp;range=&lt;3&gt;</strong></span></span>
 
-        </p><div class="sect3" title="Description"><div class="titlepage"><div><div><h4 class="title"><a id="idp53176"/>Description</h4></div></div></div>
-
+        </p><div class="sect3" title="Description"><div class="titlepage"><div><div><h4 class="title"><a id="idp41688"/>Description</h4></div></div></div>
+          
 
           <p>
             Get the average noise level of nearby area. The target location is specified by geo coordinates (latitude/longitude).
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Arguments"><div class="titlepage"><div><div><h4 class="title"><a id="idp53904"/>Arguments</h4></div></div></div>
-
+        </p><div class="sect3" title="Arguments"><div class="titlepage"><div><div><h4 class="title"><a id="idp42416"/>Arguments</h4></div></div></div>
+          
 
           <p>
             </p><div class="variablelist"><dl><dt><span class="term">latitude</span></dt><dd>
@@ -382,24 +386,24 @@ Accept: text/html, application/xml, application/json
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Body Payload"><div class="titlepage"><div><div><h4 class="title"><a id="idp59176"/>Body Payload</h4></div></div></div>
-
+        </p><div class="sect3" title="Body Payload"><div class="titlepage"><div><div><h4 class="title"><a id="idp47688"/>Body Payload</h4></div></div></div>
+          
 
           <p>
             This is a GET request without body payload.
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Return Message"><div class="titlepage"><div><div><h4 class="title"><a id="idp59848"/>Return Message</h4></div></div></div>
-
+        </p><div class="sect3" title="Return Message"><div class="titlepage"><div><div><h4 class="title"><a id="idp48336"/>Return Message</h4></div></div></div>
+          
 
           <p>
             The method will return a status code (e.g. <code class="literal">OK</code> or <code class="literal">Error</code>), a human-readable message and the average noise level for the area surrounding the desired geo coordinates. The noise level is an integer value. Its unit is dB.
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Examples"><div class="titlepage"><div><div><h4 class="title"><a id="idp61504"/>Examples</h4></div></div></div>
-
+        </p><div class="sect3" title="Examples"><div class="titlepage"><div><div><h4 class="title"><a id="idp49784"/>Examples</h4></div></div></div>
+          
 
           <div class="caption"><p>Show JSON payload of REST response.</p></div>
           <pre class="programlisting">
@@ -421,25 +425,25 @@ Accept: text/html, application/xml, application/json
     </div>
 
     <div class="sect2" title="Get average noise level by zip code"><div class="titlepage"><div><div><h3 class="title"><a id="averageZip"/>Get average noise level by zip code</h3></div></div></div>
-
+      
 
       <p>
-        <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/v1/<span class="bold"><strong>noiseLevels/average/?zipCode=&lt;1&gt;</strong></span></span>
+        <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/v1.3/<span class="bold"><strong>noiseLevels/average/?zipCode=&lt;1&gt;</strong></span></span>
 
         </p><div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning</h3>
           <p>This method is deprecated. Please do not query the average noise level by zip code. Use <a class="ulink" href="documentation.html#averageGeo">geo coordinates</a> instead. Noise levels returned by postcode are very likely to be inaccurate and may be based on incomplete data.</p>
         </div><p>
 
-        </p><div class="sect3" title="Description"><div class="titlepage"><div><div><h4 class="title"><a id="idp66216"/>Description</h4></div></div></div>
-
+        </p><div class="sect3" title="Description"><div class="titlepage"><div><div><h4 class="title"><a id="idp53864"/>Description</h4></div></div></div>
+          
 
           <p>
             Get average noise level of postcode area.
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Arguments"><div class="titlepage"><div><div><h4 class="title"><a id="idp66952"/>Arguments</h4></div></div></div>
-
+        </p><div class="sect3" title="Arguments"><div class="titlepage"><div><div><h4 class="title"><a id="idp54512"/>Arguments</h4></div></div></div>
+          
 
           <p>
             </p><div class="variablelist"><dl><dt><span class="term">zipCode</span></dt><dd>
@@ -450,24 +454,24 @@ Accept: text/html, application/xml, application/json
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Body Payload"><div class="titlepage"><div><div><h4 class="title"><a id="idp69264"/>Body Payload</h4></div></div></div>
-
+        </p><div class="sect3" title="Body Payload"><div class="titlepage"><div><div><h4 class="title"><a id="idp56840"/>Body Payload</h4></div></div></div>
+          
 
           <p>
             This is a GET request without body payload.
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Return Message"><div class="titlepage"><div><div><h4 class="title"><a id="idp70000"/>Return Message</h4></div></div></div>
-
+        </p><div class="sect3" title="Return Message"><div class="titlepage"><div><div><h4 class="title"><a id="idp57512"/>Return Message</h4></div></div></div>
+          
 
           <p>
             The method will return a status code (e.g. <code class="literal">OK</code> or <code class="literal">Error</code>), a human-readable message and the average noise level for the desired zip code area. The noise level is an integer value. Its unit is dB.
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Examples"><div class="titlepage"><div><div><h4 class="title"><a id="idp71640"/>Examples</h4></div></div></div>
-
+        </p><div class="sect3" title="Examples"><div class="titlepage"><div><div><h4 class="title"><a id="idp58952"/>Examples</h4></div></div></div>
+          
 
           <div class="caption"><p>Show JSON payload of REST response.</p></div>
           <pre class="programlisting">
@@ -489,21 +493,21 @@ Accept: text/html, application/xml, application/json
     </div>
 
     <div class="sect2" title="List nearby noise levels"><div class="titlepage"><div><div><h3 class="title"><a id="listLevels"/>List nearby noise levels</h3></div></div></div>
-
+      
 
       <p>
-        <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/v1/<span class="bold"><strong>noiseLevels/list/?latitude=&lt;1&gt;&amp;longitude=&lt;2&gt;&amp;range=&lt;3&gt;</strong></span></span>
+        <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/v1.3/<span class="bold"><strong>noiseLevels/list/?latitude=&lt;1&gt;&amp;longitude=&lt;2&gt;&amp;range=&lt;3&gt;</strong></span></span>
 
-        </p><div class="sect3" title="Description"><div class="titlepage"><div><div><h4 class="title"><a id="idp75288"/>Description</h4></div></div></div>
-
+        </p><div class="sect3" title="Description"><div class="titlepage"><div><div><h4 class="title"><a id="idp62080"/>Description</h4></div></div></div>
+          
 
           <p>
             Get a list of noise levels that were recorded in the nearby area.
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Arguments"><div class="titlepage"><div><div><h4 class="title"><a id="idp75976"/>Arguments</h4></div></div></div>
-
+        </p><div class="sect3" title="Arguments"><div class="titlepage"><div><div><h4 class="title"><a id="idp62968"/>Arguments</h4></div></div></div>
+          
 
           <p>
             </p><div class="variablelist"><dl><dt><span class="term">latitude</span></dt><dd>
@@ -522,24 +526,24 @@ Accept: text/html, application/xml, application/json
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Body Payload"><div class="titlepage"><div><div><h4 class="title"><a id="idp82064"/>Body Payload</h4></div></div></div>
-
+        </p><div class="sect3" title="Body Payload"><div class="titlepage"><div><div><h4 class="title"><a id="idp69712"/>Body Payload</h4></div></div></div>
+          
 
           <p>
             This is a GET request without body payload.
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Return Message"><div class="titlepage"><div><div><h4 class="title"><a id="idp82800"/>Return Message</h4></div></div></div>
-
+        </p><div class="sect3" title="Return Message"><div class="titlepage"><div><div><h4 class="title"><a id="idp70448"/>Return Message</h4></div></div></div>
+          
 
           <p>
             The method will return a status code (e.g. <code class="literal">OK</code> or <code class="literal">Error</code>), a human-readable message, a list of noise levels (if any) and a result count (i.e. number of results returned).
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Examples"><div class="titlepage"><div><div><h4 class="title"><a id="idp84416"/>Examples</h4></div></div></div>
-
+        </p><div class="sect3" title="Examples"><div class="titlepage"><div><div><h4 class="title"><a id="idp71848"/>Examples</h4></div></div></div>
+          
 
           <div class="caption"><p>Show JSON payload of REST response.</p></div>
           <pre class="programlisting">
@@ -607,21 +611,21 @@ Accept: text/html, application/xml, application/json
     </div>
 
     <div class="sect2" title="Report noise level"><div class="titlepage"><div><div><h3 class="title"><a id="reportLevel"/>Report noise level</h3></div></div></div>
-
+      
 
       <p>
-        <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/v1/<span class="bold"><strong>noiseLevels/report/?latitude=&lt;1&gt;&amp;longitude=&lt;2&gt;&amp;zipCode=&lt;3&gt;</strong></span></span>
+        <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/v1.3/<span class="bold"><strong>noiseLevels/report/?latitude=&lt;1&gt;&amp;longitude=&lt;2&gt;&amp;zipCode=&lt;3&gt;</strong></span></span>
 
-        </p><div class="sect3" title="Description"><div class="titlepage"><div><div><h4 class="title"><a id="idp88928"/>Description</h4></div></div></div>
-
+        </p><div class="sect3" title="Description"><div class="titlepage"><div><div><h4 class="title"><a id="idp76472"/>Description</h4></div></div></div>
+          
 
           <p>
             Report noise level for the given location. The target area is specified by geo coordinates (latitude/longitude). The zip code parameter is optional.
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Arguments"><div class="titlepage"><div><div><h4 class="title"><a id="idp89768"/>Arguments</h4></div></div></div>
-
+        </p><div class="sect3" title="Arguments"><div class="titlepage"><div><div><h4 class="title"><a id="idp77368"/>Arguments</h4></div></div></div>
+          
 
           <p>
             </p><div class="variablelist"><dl><dt><span class="term">latitude</span></dt><dd>
@@ -640,8 +644,8 @@ Accept: text/html, application/xml, application/json
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Body Payload"><div class="titlepage"><div><div><h4 class="title"><a id="idp96272"/>Body Payload</h4></div></div></div>
-
+        </p><div class="sect3" title="Body Payload"><div class="titlepage"><div><div><h4 class="title"><a id="idp83920"/>Body Payload</h4></div></div></div>
+          
 
           <p>
             This is a POST request with body payload. If you want to report noise levels, please use your <a class="ulink" href="documentation.html#apiKeys">API key for authentification</a>.
@@ -696,16 +700,16 @@ Accept: text/html, application/xml, application/json
 }</pre>
         </div><p>
 
-        </p><div class="sect3" title="Return Message"><div class="titlepage"><div><div><h4 class="title"><a id="idp110232"/>Return Message</h4></div></div></div>
-
+        </p><div class="sect3" title="Return Message"><div class="titlepage"><div><div><h4 class="title"><a id="idp97840"/>Return Message</h4></div></div></div>
+          
 
           <p>
             The method will return a status code (e.g. <code class="literal">OK</code> or <code class="literal">Error</code>) and a human-readable message.
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Examples"><div class="titlepage"><div><div><h4 class="title"><a id="idp111584"/>Examples</h4></div></div></div>
-
+        </p><div class="sect3" title="Examples"><div class="titlepage"><div><div><h4 class="title"><a id="idp99192"/>Examples</h4></div></div></div>
+          
 
           <div class="caption"><p>Show JSON payload of REST response.</p></div>
           <pre class="programlisting">
@@ -726,20 +730,20 @@ Accept: text/html, application/xml, application/json
   </div>
 
   <div class="sect1" title="Sound Samples Resource"><div class="titlepage"><div><div><h2 class="title"><a id="soundSamples"/>Sound Samples Resource</h2></div></div></div>
-
+    
 
     <p>
       This resource handles all requests related to sound samples.
     </p>
 
     <div class="sect2" title="List nearby sound samples"><div class="titlepage"><div><div><h3 class="title"><a id="listSamples"/>List nearby sound samples</h3></div></div></div>
-
+      
 
       <p>
-        <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/v1/<span class="bold"><strong>soundSamples/list/?latitude=&lt;1&gt;&amp;longitude=&lt;2&gt;&amp;range=&lt;3&gt;</strong></span></span>
+        <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/v1.3/<span class="bold"><strong>soundSamples/list/?latitude=&lt;1&gt;&amp;longitude=&lt;2&gt;&amp;range=&lt;3&gt;</strong></span></span>
 
-        </p><div class="sect3" title="Description"><div class="titlepage"><div><div><h4 class="title"><a id="idp116024"/>Description</h4></div></div></div>
-
+        </p><div class="sect3" title="Description"><div class="titlepage"><div><div><h4 class="title"><a id="idp103176"/>Description</h4></div></div></div>
+          
 
           <p>
             Get a list of sound samples that were recorded in the nearby area. The method will not return the sound samples themselves, but their metadata.
@@ -756,8 +760,8 @@ Accept: text/html, application/xml, application/json
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Arguments"><div class="titlepage"><div><div><h4 class="title"><a id="idp119552"/>Arguments</h4></div></div></div>
-
+        </p><div class="sect3" title="Arguments"><div class="titlepage"><div><div><h4 class="title"><a id="idp107352"/>Arguments</h4></div></div></div>
+          
 
           <p>
             </p><div class="variablelist"><dl><dt><span class="term">latitude</span></dt><dd>
@@ -776,24 +780,24 @@ Accept: text/html, application/xml, application/json
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Body Payload"><div class="titlepage"><div><div><h4 class="title"><a id="idp125944"/>Body Payload</h4></div></div></div>
-
+        </p><div class="sect3" title="Body Payload"><div class="titlepage"><div><div><h4 class="title"><a id="idp113600"/>Body Payload</h4></div></div></div>
+          
 
           <p>
             This is a GET request without body payload.
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Return Message"><div class="titlepage"><div><div><h4 class="title"><a id="idp126680"/>Return Message</h4></div></div></div>
-
+        </p><div class="sect3" title="Return Message"><div class="titlepage"><div><div><h4 class="title"><a id="idp114336"/>Return Message</h4></div></div></div>
+          
 
           <p>
             The method will return a status code (e.g. <code class="literal">OK</code> or <code class="literal">Error</code>), a human-readable message, a list of sound samples (if any) and a result count (i.e. number of results returned).
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Examples"><div class="titlepage"><div><div><h4 class="title"><a id="idp128080"/>Examples</h4></div></div></div>
-
+        </p><div class="sect3" title="Examples"><div class="titlepage"><div><div><h4 class="title"><a id="idp115952"/>Examples</h4></div></div></div>
+          
 
           <div class="caption"><p>Show JSON payload of REST response.</p></div>
           <pre class="programlisting">
@@ -807,6 +811,7 @@ Accept: text/html, application/xml, application/json
       "Title": "Construction site",
       "Timestamp": "1349964015",
       "Description": "Drill on a construction site.",
+      "Tag": "construction",
       "SampleID": "1ceb8089e7441732e10866019101e44f"
     },
     "1": {
@@ -815,6 +820,7 @@ Accept: text/html, application/xml, application/json
       "Title": "Car sound",
       "Timestamp": "1350092454",
       "Description": "A Ferrari in the city.",
+      "Tag": "car",
       "SampleID": "b64f3dbd20329d9af01ff21eed64ff0c"
     },
     "2": {
@@ -823,6 +829,7 @@ Accept: text/html, application/xml, application/json
       "Title": "Ducks",
       "Timestamp": "1350082846",
       "Description": "A group of ducks in the city park.",
+      "Tag": "nature",
       "SampleID": "5851478d17719a6beaf3eeeff03d6a46"
     }
   },
@@ -841,6 +848,7 @@ Accept: text/html, application/xml, application/json
       &lt;Title&gt;Construction site&lt;/Title&gt;
       &lt;Timestamp&gt;1349964015&lt;/Timestamp&gt;
       &lt;Description&gt;Drill on a construction site.&lt;/Description&gt;
+      &lt;Tag&gt;construction&lt;/Tag&gt;
       &lt;SampleID&gt;1ceb8089e7441732e10866019101e44f&lt;/SampleID&gt;
     &lt;/Item&gt;
     &lt;Item&gt;
@@ -849,6 +857,7 @@ Accept: text/html, application/xml, application/json
       &lt;Title&gt;Car sound&lt;/Title&gt;
       &lt;Timestamp&gt;1350092454&lt;/Timestamp&gt;
       &lt;Description&gt;A Ferrari in the city.&lt;/Description&gt;
+      &lt;Tag&gt;car&lt;/Tag&gt;
       &lt;SampleID&gt;b64f3dbd20329d9af01ff21eed64ff0c&lt;/SampleID&gt;
     &lt;/Item&gt;
     &lt;Item&gt;
@@ -857,6 +866,7 @@ Accept: text/html, application/xml, application/json
       &lt;Title&gt;Ducks&lt;/Title&gt;
       &lt;Timestamp&gt;1350092454&lt;/Timestamp&gt;
       &lt;Description&gt;A group of ducks in the city park.&lt;/Description&gt;
+      &lt;Tag&gt;nature&lt;/Tag&gt;
       &lt;SampleID&gt;b64f3dbd20329d9af01ff21eed64ff0c&lt;/SampleID&gt;
     &lt;/Item&gt;
   &lt;/SampleData&gt;
@@ -867,21 +877,21 @@ Accept: text/html, application/xml, application/json
     </div>
 
     <div class="sect2" title="Upload sound sample"><div class="titlepage"><div><div><h3 class="title"><a id="uploadSample"/>Upload sound sample</h3></div></div></div>
-
+      
 
       <p>
-        <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/v1/<span class="bold"><strong>soundSamples/upload/?latitude=&lt;1&gt;&amp;longitude=&lt;2&gt;</strong></span></span>
+        <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/v1.3/<span class="bold"><strong>soundSamples/upload/?latitude=&lt;1&gt;&amp;longitude=&lt;2&gt;</strong></span></span>
 
-        </p><div class="sect3" title="Description"><div class="titlepage"><div><div><h4 class="title"><a id="idp133152"/>Description</h4></div></div></div>
-
+        </p><div class="sect3" title="Description"><div class="titlepage"><div><div><h4 class="title"><a id="idp121080"/>Description</h4></div></div></div>
+          
 
           <p>
             Upload a sound sample to the server. The recording location is specified by geo coordinates (latitude/longitude).
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Arguments"><div class="titlepage"><div><div><h4 class="title"><a id="idp133616"/>Arguments</h4></div></div></div>
-
+        </p><div class="sect3" title="Arguments"><div class="titlepage"><div><div><h4 class="title"><a id="idp121960"/>Arguments</h4></div></div></div>
+          
 
           <p>
             </p><div class="variablelist"><dl><dt><span class="term">latitude</span></dt><dd>
@@ -896,8 +906,8 @@ Accept: text/html, application/xml, application/json
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Body Payload"><div class="titlepage"><div><div><h4 class="title"><a id="idp138992"/>Body Payload</h4></div></div></div>
-
+        </p><div class="sect3" title="Body Payload"><div class="titlepage"><div><div><h4 class="title"><a id="idp126792"/>Body Payload</h4></div></div></div>
+          
 
           <p>
             This is a POST request with body payload. If you want to upload sound samples, please use your <a class="ulink" href="documentation.html#apiKeys">API key for authentification</a>.
@@ -915,6 +925,10 @@ Accept: text/html, application/xml, application/json
                 </dd><dt><span class="term">Description</span></dt><dd>
                   <p>
                     Detailed description of the sound sample. String value with no limitation on the text length. <span class="emphasis"><em>This parameter is optional.</em></span>
+                  </p>
+                </dd><dt><span class="term">Tag</span></dt><dd>
+                  <p>
+                    Descriptive tag for content of sound sample. String value. Either one of <code class="literal">car</code>, <code class="literal">train</code>, <code class="literal">people</code>, <code class="literal">nature</code>, <code class="literal">music</code>, <code class="literal">plane</code>, <code class="literal">construction</code>, <code class="literal">church</code>, <code class="literal">ship</code> or <code class="literal">other</code>.
                   </p>
                 </dd><dt><span class="term">PayloadType</span></dt><dd>
                   <p>
@@ -948,6 +962,7 @@ Accept: text/html, application/xml, application/json
 {
   "Title": "Church bell",
   "Time": "1350164562",
+  "Tag": "church",
   "Description": "Hear the church bells ring.",
   "PayloadType": "mp3",
   <span class="bold"><strong>"Payload": "&lt;Base64-encoded Sound Sample&gt;",</strong></span>
@@ -957,16 +972,16 @@ Accept: text/html, application/xml, application/json
 }</pre>
         </div><p>
 
-        </p><div class="sect3" title="Return Message"><div class="titlepage"><div><div><h4 class="title"><a id="idp154480"/>Return Message</h4></div></div></div>
-
+        </p><div class="sect3" title="Return Message"><div class="titlepage"><div><div><h4 class="title"><a id="idp147144"/>Return Message</h4></div></div></div>
+          
 
           <p>
             The method will return a status code (e.g. <code class="literal">OK</code> or <code class="literal">Error</code>), a human-readable message and an identifier for the newly uploaded sound sample.
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Examples"><div class="titlepage"><div><div><h4 class="title"><a id="idp156008"/>Examples</h4></div></div></div>
-
+        </p><div class="sect3" title="Examples"><div class="titlepage"><div><div><h4 class="title"><a id="idp148600"/>Examples</h4></div></div></div>
+          
 
           <div class="caption"><p>Show JSON payload of REST response.</p></div>
           <pre class="programlisting">
@@ -989,36 +1004,36 @@ Accept: text/html, application/xml, application/json
   </div>
 
   <div class="sect1" title="Device Infos Resource"><div class="titlepage"><div><div><h2 class="title"><a id="deviceInfos"/>Device Infos Resource</h2></div></div></div>
-
+    
 
     <p>
       This resource handles all requests related to device information.
     </p>
 
     <div class="sect2" title="Report device information"><div class="titlepage"><div><div><h3 class="title"><a id="reportInfos"/>Report device information</h3></div></div></div>
-
+      
 
       <p>
-        <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/v1/<span class="bold"><strong>deviceInfos/report/</strong></span></span>
+        <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/v1.3/<span class="bold"><strong>deviceInfos/report/</strong></span></span>
 
-        </p><div class="sect3" title="Description"><div class="titlepage"><div><div><h4 class="title"><a id="idp160008"/>Description</h4></div></div></div>
-
+        </p><div class="sect3" title="Description"><div class="titlepage"><div><div><h4 class="title"><a id="idp153168"/>Description</h4></div></div></div>
+          
 
           <p>
             Report device information. <span class="issue">This method is intended for internal use only.</span>
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Arguments"><div class="titlepage"><div><div><h4 class="title"><a id="idp161624"/>Arguments</h4></div></div></div>
-
+        </p><div class="sect3" title="Arguments"><div class="titlepage"><div><div><h4 class="title"><a id="idp154232"/>Arguments</h4></div></div></div>
+          
 
           <p>
             This is a POST request without any URL arguments.
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Body Payload"><div class="titlepage"><div><div><h4 class="title"><a id="idp162360"/>Body Payload</h4></div></div></div>
-
+        </p><div class="sect3" title="Body Payload"><div class="titlepage"><div><div><h4 class="title"><a id="idp154968"/>Body Payload</h4></div></div></div>
+          
 
           <p>
             This is a POST request with body payload. If you want to report device information, please use your <a class="ulink" href="documentation.html#apiKeys">API key for authentification</a>.
@@ -1068,16 +1083,16 @@ Accept: text/html, application/xml, application/json
 }</pre>
         </div><p>
 
-        </p><div class="sect3" title="Return Message"><div class="titlepage"><div><div><h4 class="title"><a id="idp174232"/>Return Message</h4></div></div></div>
-
+        </p><div class="sect3" title="Return Message"><div class="titlepage"><div><div><h4 class="title"><a id="idp166832"/>Return Message</h4></div></div></div>
+          
 
           <p>
             The method will return a status code (e.g. <code class="literal">OK</code> or <code class="literal">Error</code>) and a human-readable message.
           </p>
         </div><p>
 
-        </p><div class="sect3" title="Examples"><div class="titlepage"><div><div><h4 class="title"><a id="idp175616"/>Examples</h4></div></div></div>
-
+        </p><div class="sect3" title="Examples"><div class="titlepage"><div><div><h4 class="title"><a id="idp168224"/>Examples</h4></div></div></div>
+          
 
           <div class="caption"><p>Show JSON payload of REST response.</p></div>
           <pre class="programlisting">
@@ -1097,11 +1112,507 @@ Accept: text/html, application/xml, application/json
     </div>
   </div>
 
-  <div class="sect1" title="Release History"><div class="titlepage"><div><div><h2 class="title"><a id="history"/>Release History</h2></div></div></div>
+  <div class="sect1" title="Use Statistics Resource"><div class="titlepage"><div><div><h2 class="title"><a id="useStats"/>Use Statistics Resource</h2></div></div></div>
+    
 
+    <p>
+      This resource handles all requests related to use statistics.
+    </p>
+
+    <div class="sect2" title="Count number of events"><div class="titlepage"><div><div><h3 class="title"><a id="countEvents"/>Count number of events</h3></div></div></div>
+      
+
+      <p>
+        <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/v1.3/<span class="bold"><strong>useStats/count/?what=&lt;1&gt;&amp;when=&lt;2&gt;&amp;from=&lt;3&gt;&amp;to=&lt;4&gt;</strong></span></span>
+
+        </p><div class="sect3" title="Description"><div class="titlepage"><div><div><h4 class="title"><a id="idp172480"/>Description</h4></div></div></div>
+          
+
+          <p>
+            Count total number of events (e.g. reports or downloads) in a certain period of time. Content type <code class="literal">appDownloads</code> cannot be filtered by time frame (defaults to <code class="literal">ever</code>).
+          </p>
+        </div><p>
+
+        </p><div class="sect3" title="Arguments"><div class="titlepage"><div><div><h4 class="title"><a id="idp174152"/>Arguments</h4></div></div></div>
+          
+
+          <p>
+            </p><div class="variablelist"><dl><dt><span class="term">what</span></dt><dd>
+                  <p>
+                    Content type of event. String value. Either one of <code class="literal">noiseLevels</code>, <code class="literal">soundSamples</code>, <code class="literal">deviceInfos</code>, <code class="literal">uniqueUsers</code> or <code class="literal">appDownloads</code>.
+                  </p>
+                </dd><dt><span class="term">when</span></dt><dd>
+                  <p>
+                    Time period for result filtering. String value. Either one of <code class="literal">today</code>, <code class="literal">yesterday</code>, <code class="literal">last-week</code>, <code class="literal">last-month</code>, <code class="literal">last-year</code>, <code class="literal">from-to</code> or <code class="literal">ever</code>. <span class="emphasis"><em>This parameter is optional.</em></span>
+                  </p>
+                </dd><dt><span class="term">from</span></dt><dd>
+                  <p>
+                    Start of time frame. UNIX timestamp. Will only be evaluated, if <code class="literal">when</code> parameter is set to <code class="literal">from-to</code>. <span class="emphasis"><em>This parameter is optional.</em></span>
+                  </p>
+                </dd><dt><span class="term">to</span></dt><dd>
+                  <p>
+                    End of time frame. UNIX timestamp. Will only be evaluated, if <code class="literal">when</code> parameter is set to <code class="literal">from-to</code>. <span class="emphasis"><em>This parameter is optional.</em></span>
+                  </p>
+                </dd></dl></div><p>
+          </p>
+        </div><p>
+
+        </p><div class="sect3" title="Body Payload"><div class="titlepage"><div><div><h4 class="title"><a id="idp186016"/>Body Payload</h4></div></div></div>
+          
+
+          <p>
+            This is a GET request without body payload.
+          </p>
+        </div><p>
+
+        </p><div class="sect3" title="Return Message"><div class="titlepage"><div><div><h4 class="title"><a id="idp186752"/>Return Message</h4></div></div></div>
+          
+
+          <p>
+            The method will return a status code (e.g. <code class="literal">OK</code> or <code class="literal">Error</code>), a human-readable message and accumulated use data. The use statistics contain content type of event, desired time period and total number of events.
+          </p>
+        </div><p>
+
+        </p><div class="sect3" title="Examples"><div class="titlepage"><div><div><h4 class="title"><a id="idp188184"/>Examples</h4></div></div></div>
+          
+
+          <div class="caption"><p>Show JSON payload of REST response.</p></div>
+          <pre class="programlisting">
+{
+  "Statuscode": "OK",
+  "Message": "Use statistics queried successfully.",
+  "UseStatistics": {
+    "ContentType": "noiseLevels",
+    "TimePeriod": "last-month",
+    "ReportsCounter": "112"
+  }
+}</pre>
+
+          <div class="caption"><p>Show XML payload of REST response.</p></div>
+          <pre class="programlisting">
+&lt;Response&gt;
+  &lt;Statuscode&gt;OK&lt;/Statuscode&gt;
+  &lt;Message&gt;Use statistics queried successfully.&lt;/Message&gt;
+  &lt;UseStatistics&gt;
+    &lt;ContentType&gt;noiseLevels&lt;/ContentType&gt;
+    &lt;TimePeriod&gt;last-month&lt;/TimePeriod&gt;
+    &lt;ReportsCounter&gt;112&lt;/ReportsCounter&gt;
+  &lt;/UseStatistics&gt;
+&lt;/Response&gt;</pre>
+        </div><p>
+      </p>
+    </div>
+
+    <div class="sect2" title="Summarize use statistics"><div class="titlepage"><div><div><h3 class="title"><a id="summarizeStatistics"/>Summarize use statistics</h3></div></div></div>
+      
+
+      <p>
+        <span class="rest-url">https://citysound.itm.uni-luebeck.de/rest/v1.3/<span class="bold"><strong>useStats/summary/?what=&lt;1&gt;</strong></span></span>
+
+        </p><div class="sect3" title="Description"><div class="titlepage"><div><div><h4 class="title"><a id="idp191904"/>Description</h4></div></div></div>
+          
+
+          <p>
+            Summarize use statistics for a specific event (e.g. reports or downloads). The method will return data for all hours of the current day, as well as a summary for the last twelve months. Content type <code class="literal">appDownloads</code> does not support temporal filtering and will always return all-time total.
+          </p>
+        </div><p>
+
+        </p><div class="sect3" title="Arguments"><div class="titlepage"><div><div><h4 class="title"><a id="idp193288"/>Arguments</h4></div></div></div>
+          
+
+          <p>
+            </p><div class="variablelist"><dl><dt><span class="term">what</span></dt><dd>
+                  <p>
+                    Content type of event. String value. Either one of <code class="literal">noiseLevels</code>, <code class="literal">soundSamples</code>, <code class="literal">deviceInfos</code>, <code class="literal">uniqueUsers</code> or <code class="literal">appDownloads</code>.
+                  </p>
+                </dd></dl></div><p>
+          </p>
+        </div><p>
+
+        </p><div class="sect3" title="Body Payload"><div class="titlepage"><div><div><h4 class="title"><a id="idp197224"/>Body Payload</h4></div></div></div>
+          
+
+          <p>
+            This is a GET request without body payload.
+          </p>
+        </div><p>
+
+        </p><div class="sect3" title="Return Message"><div class="titlepage"><div><div><h4 class="title"><a id="idp197896"/>Return Message</h4></div></div></div>
+          
+
+          <p>
+            The method will return a status code (e.g. <code class="literal">OK</code> or <code class="literal">Error</code>), a human-readable message and summarized use data. The statistics summary contains content type of event, UNIX timestamp of summary creation and a collection of summary data.
+          </p>
+
+          <p>
+            The summary data is divided into two sections: An array that contains reports for all hours of the current day, as well as a summary of events for the last twelve months.
+          </p>
+        </div><p>
+
+        </p><div class="sect3" title="Examples"><div class="titlepage"><div><div><h4 class="title"><a id="idp199864"/>Examples</h4></div></div></div>
+          
+
+          <div class="caption"><p>Show JSON payload of REST response.</p></div>
+          <pre class="programlisting">
+{
+  "Statuscode": "OK",
+  "Message": "Statistics summary queried successfully.",
+  "StatisticsSummary": {
+    "ContentType": "noiseLevels",
+    "NowTimestamp": "1361798647",
+    "SummaryData": {
+      "Today": {
+        "0": {
+          "Date": "2013-02-25, 00:00:00",
+          "ReportsCounter": "0"
+        },
+        "1": {
+          "Date":" 2013-02-25, 01:00:00",
+          "ReportsCounter": "0"
+        },
+        "2": {
+          "Date": "2013-02-25, 02:00:00",
+          "ReportsCounter": "0"
+        },
+        "3": {
+          "Date": "2013-02-25, 03:00:00",
+          "ReportsCounter": "0"
+        },
+        "4": {
+          "Date": "2013-02-25, 04:00:00",
+          "ReportsCounter": "0"
+        },
+        "5": {
+          "Date": "2013-02-25, 05:00:00",
+          "ReportsCounter": "0"
+        },
+        "6": {
+          "Date": "2013-02-25, 06:00:00",
+          "ReportsCounter": "0"
+        },
+        "7": {
+          "Date": "2013-02-25, 07:00:00",
+          "ReportsCounter": "0"
+        },
+        "8": {
+          "Date": "2013-02-25, 08:00:00",
+          "ReportsCounter": "0"
+        },
+        "9": {
+          "Date": "2013-02-25, 09:00:00",
+          "ReportsCounter": "0"
+        },
+        "10": {
+          "Date": "2013-02-25, 10:00:00",
+          "ReportsCounter": "0"
+        },
+        "11": {
+          "Date": "2013-02-25, 11:00:00",
+          "ReportsCounter": "0"
+        },
+        "12": {
+          "Date": "2013-02-25, 12:00:00",
+          "ReportsCounter": "0"
+        },
+        "13": {
+          "Date": "2013-02-25, 13:00:00",
+          "ReportsCounter": "0"
+        },
+        "14": {
+          "Date": "2013-02-25, 14:00:00",
+          "ReportsCounter": "0"
+        },
+        "15": {
+          "Date": "2013-02-25, 15:00:00",
+          "ReportsCounter": "0"
+        },
+        "16": {
+          "Date": "2013-02-25, 16:00:00",
+          "ReportsCounter": "0"
+        },
+        "17": {
+          "Date": "2013-02-25, 17:00:00",
+          "ReportsCounter": "0"
+        },
+        "18": {
+          "Date": "2013-02-25, 18:00:00",
+          "ReportsCounter": "0"
+        },
+        "19": {
+          "Date": "2013-02-25, 19:00:00",
+          "ReportsCounter": "0"
+        },
+        "20": {
+          "Date": "2013-02-25, 20:00:00",
+          "ReportsCounter": "0"
+        },
+        "21": {
+          "Date": "2013-02-25, 21:00:00",
+          "ReportsCounter": "0"
+        },
+        "22": {
+          "Date": "2013-02-25, 22:00:00",
+          "ReportsCounter": "0"
+        },
+        "23": {
+          "Date": "2013-02-25, 23:00:00",
+          "ReportsCounter": "0"
+        }
+      },
+      "LastMonths": {
+        "0": {
+          "Month": "2012-03",
+          "ReportsCounter": "0"
+        },
+        "1": {
+          "Month": "2012-04",
+          "ReportsCounter": "0"
+        },
+        "2": {
+          "Month": "2012-05",
+          "ReportsCounter": "6008"
+        },
+        "3": {
+          "Month": "2012-06",
+          "ReportsCounter": "647"
+        },
+        "4": {
+          "Month": "2012-07",
+          "ReportsCounter": "6689"
+        },
+        "5": {
+          "Month": "2012-08",
+          "ReportsCounter": "3131"
+        },
+        "6": {
+          "Month": "2012-09",
+          "ReportsCounter": "2368"
+        },
+        "7": {
+          "Month": "2012-10",
+          "ReportsCounter": "28152"
+        },
+        "8": {
+          "Month": "2012-11",
+          "ReportsCounter": "71987"
+        },
+        "9": {
+          "Month": "2012-12",
+          "ReportsCounter": "18"
+        },
+        "10": {
+          "Month": "2013-01",
+          "ReportsCounter": "112"
+        },
+        "11": {
+          "Month": "2013-02",
+          "ReportsCounter": "513"
+        }
+      }
+    }
+  }
+}</pre>
+
+          <div class="caption"><p>Show XML payload of REST response.</p></div>
+          <pre class="programlisting">
+&lt;Response&gt;
+  &lt;Statuscode&gt;OK&lt;/Statuscode&gt;
+  &lt;Message&gt;Statistics summary queried successfully.&lt;/Message&gt;
+  &lt;StatisticsSummary&gt;
+    &lt;ContentType&gt;noiseLevels&lt;/ContentType&gt;
+    &lt;NowTimestamp&gt;1361798647&lt;/NowTimestamp&gt;
+    &lt;SummaryData&gt;
+      &lt;Today&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 00:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 01:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 02:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 03:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 04:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 05:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 06:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 07:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 08:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 09:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 10:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 11:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 12:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 13:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 14:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 15:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 16:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 17:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 18:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 19:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 20:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 21:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 22:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Date&gt;2013-02-25, 23:00:00&lt;/Date&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+      &lt;/Today&gt;
+      &lt;LastMonths&gt;
+        &lt;Item&gt;
+          &lt;Month&gt;2012-03&lt;/Month&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Month&gt;2012-04&lt;/Month&gt;
+          &lt;ReportsCounter&gt;0&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Month&gt;2012-05&lt;/Month&gt;
+          &lt;ReportsCounter&gt;6008&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Month&gt;2012-06&lt;/Month&gt;
+          &lt;ReportsCounter&gt;647&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Month&gt;2012-07&lt;/Month&gt;
+          &lt;ReportsCounter&gt;6689&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Month&gt;2012-08&lt;/Month&gt;
+          &lt;ReportsCounter&gt;3131&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Month&gt;2012-09&lt;/Month&gt;
+          &lt;ReportsCounter&gt;2368&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Month&gt;2012-10&lt;/Month&gt;
+          &lt;ReportsCounter&gt;28152&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Month&gt;2012-11&lt;/Month&gt;
+          &lt;ReportsCounter&gt;71987&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Month&gt;2012-12&lt;/Month&gt;
+          &lt;ReportsCounter&gt;18&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Month&gt;2013-01&lt;/Month&gt;
+          &lt;ReportsCounter&gt;112&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+        &lt;Item&gt;
+          &lt;Month&gt;2013-02&lt;/Month&gt;
+          &lt;ReportsCounter&gt;513&lt;/ReportsCounter&gt;
+        &lt;/Item&gt;
+      &lt;/LastMonths&gt;
+    &lt;/SummaryData&gt;
+  &lt;/StatisticsSummary&gt;
+&lt;/Response&gt;</pre>
+        </div><p>
+      </p>
+    </div>
+  </div>
+
+  <div class="sect1" title="Release History"><div class="titlepage"><div><div><h2 class="title"><a id="history"/>Release History</h2></div></div></div>
+    
+
+    <div class="sect2" title="Version 1.3"><div class="titlepage"><div><div><h3 class="title"><a id="v1.3"/>Version 1.3</h3></div></div></div>
+      
+
+      <p>
+        Published on 2013-02-25.
+      </p>
+
+      <div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p>Added summary method to REST resource for use statistics.</p></li></ul></div>
+    </div>
+
+    <div class="sect2" title="Version 1.2"><div class="titlepage"><div><div><h3 class="title"><a id="v1.2"/>Version 1.2</h3></div></div></div>
+      
+
+      <p>
+        Published on 2013-02-03.
+      </p>
+
+      <div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p>Added new REST resource for use statistics.</p></li></ul></div>
+    </div>
+
+    <div class="sect2" title="Version 1.1"><div class="titlepage"><div><div><h3 class="title"><a id="v1.1"/>Version 1.1</h3></div></div></div>
+      
+
+      <p>
+        Published on 2012-11-19.
+      </p>
+
+      <div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p>Fixed problem with German umlauts.</p></li><li class="listitem"><p>Added new argument <code class="literal">tag</code> to sound sample methods.</p></li></ul></div>
+    </div>
 
     <div class="sect2" title="Version 1"><div class="titlepage"><div><div><h3 class="title"><a id="v1"/>Version 1</h3></div></div></div>
-
+      
 
       <p>
         Published on 2012-10-17.

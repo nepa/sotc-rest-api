@@ -94,6 +94,9 @@ A more comprehensive documentation for end-users will be available on the [Sound
 
 ## History
 
+  * **Version 1.3:**
+    * Added summary method to REST resource for use statistics.
+
   * **Version 1.2:**
     * Added new REST resource for use statistics.
 
@@ -102,9 +105,9 @@ A more comprehensive documentation for end-users will be available on the [Sound
     * Added new argument for tagging of sound samples.
 
   * **Version 1:**
-    * Basic implementation of dispatcher, resource controllers and output handlers
-    * REST interface is compatible to Server-One's initial SOAP interface
-    * Unit tests for all REST resources
+    * Basic implementation of dispatcher, resource controllers and output handlers.
+    * REST interface is compatible to Server-One's initial SOAP interface.
+    * Unit tests for all REST resources.
 
 ## Author
 

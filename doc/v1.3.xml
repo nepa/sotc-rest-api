@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-  <!ENTITY BASE_URL "https://citysound.itm.uni-luebeck.de/rest/v1.2/">
+  <!ENTITY BASE_URL "https://citysound.itm.uni-luebeck.de/rest/v1.3/">
   <!ENTITY DOWNLOAD_URL "http://citysound.itm.uni-luebeck.de/s1/download.php?sid=">
 ]>
 
@@ -9,7 +9,7 @@
   <articleinfo>
     <title>Sound of the City REST API</title>
 
-    <pubdate>Documentation for API v1.2. Last update on <?dbtimestamp format="Y-m-d"?>.</pubdate>
+    <pubdate>Documentation for API v1.3. Last update on <?dbtimestamp format="Y-m-d"?>.</pubdate>
 
     <author>
       <honorific>Dipl.-Inform. (FH)</honorific>
@@ -1243,10 +1243,401 @@ Accept: text/html, application/xml, application/json]]>
         </sect3>
       </para>
     </sect2>
+
+    <sect2 id="summarizeStatistics">
+      <title>Summarize use statistics</title>
+
+      <para>
+        <emphasis role="rest-url">&BASE_URL;<emphasis role="bold">useStats/summary/?what=&lt;1&gt;</emphasis></emphasis>
+
+        <sect3>
+          <title>Description</title>
+
+          <para>
+            Summarize use statistics for a specific event (e.g. reports or downloads). The method will return data for all hours of the current day, as well as a summary for the last twelve months. Content type <literal>appDownloads</literal> does not support temporal filtering and will always return all-time total.
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Arguments</title>
+
+          <para>
+            <variablelist>
+              <varlistentry>
+                <term>what</term>
+                <listitem>
+                  <para>
+                    Content type of event. String value. Either one of <literal>noiseLevels</literal>, <literal>soundSamples</literal>, <literal>deviceInfos</literal>, <literal>uniqueUsers</literal> or <literal>appDownloads</literal>.
+                  </para>
+                </listitem>
+              </varlistentry>
+            </variablelist>
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Body Payload</title>
+
+          <para>
+            This is a GET request without body payload.
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Return Message</title>
+
+          <para>
+            The method will return a status code (e.g. <literal>OK</literal> or <literal>Error</literal>), a human-readable message and summarized use data. The statistics summary contains content type of event, UNIX timestamp of summary creation and a collection of summary data.
+          </para>
+
+          <para>
+            The summary data is divided into two sections: An array that contains reports for all hours of the current day, as well as a summary of events for the last twelve months.
+          </para>
+        </sect3>
+
+        <sect3>
+          <title>Examples</title>
+
+          <caption><para>Show JSON payload of REST response.</para></caption>
+          <programlisting><![CDATA[
+{
+  "Statuscode": "OK",
+  "Message": "Statistics summary queried successfully.",
+  "StatisticsSummary": {
+    "ContentType": "noiseLevels",
+    "NowTimestamp": "1361798647",
+    "SummaryData": {
+      "Today": {
+        "0": {
+          "Date": "2013-02-25, 00:00:00",
+          "ReportsCounter": "0"
+        },
+        "1": {
+          "Date":" 2013-02-25, 01:00:00",
+          "ReportsCounter": "0"
+        },
+        "2": {
+          "Date": "2013-02-25, 02:00:00",
+          "ReportsCounter": "0"
+        },
+        "3": {
+          "Date": "2013-02-25, 03:00:00",
+          "ReportsCounter": "0"
+        },
+        "4": {
+          "Date": "2013-02-25, 04:00:00",
+          "ReportsCounter": "0"
+        },
+        "5": {
+          "Date": "2013-02-25, 05:00:00",
+          "ReportsCounter": "0"
+        },
+        "6": {
+          "Date": "2013-02-25, 06:00:00",
+          "ReportsCounter": "0"
+        },
+        "7": {
+          "Date": "2013-02-25, 07:00:00",
+          "ReportsCounter": "0"
+        },
+        "8": {
+          "Date": "2013-02-25, 08:00:00",
+          "ReportsCounter": "0"
+        },
+        "9": {
+          "Date": "2013-02-25, 09:00:00",
+          "ReportsCounter": "0"
+        },
+        "10": {
+          "Date": "2013-02-25, 10:00:00",
+          "ReportsCounter": "0"
+        },
+        "11": {
+          "Date": "2013-02-25, 11:00:00",
+          "ReportsCounter": "0"
+        },
+        "12": {
+          "Date": "2013-02-25, 12:00:00",
+          "ReportsCounter": "0"
+        },
+        "13": {
+          "Date": "2013-02-25, 13:00:00",
+          "ReportsCounter": "0"
+        },
+        "14": {
+          "Date": "2013-02-25, 14:00:00",
+          "ReportsCounter": "0"
+        },
+        "15": {
+          "Date": "2013-02-25, 15:00:00",
+          "ReportsCounter": "0"
+        },
+        "16": {
+          "Date": "2013-02-25, 16:00:00",
+          "ReportsCounter": "0"
+        },
+        "17": {
+          "Date": "2013-02-25, 17:00:00",
+          "ReportsCounter": "0"
+        },
+        "18": {
+          "Date": "2013-02-25, 18:00:00",
+          "ReportsCounter": "0"
+        },
+        "19": {
+          "Date": "2013-02-25, 19:00:00",
+          "ReportsCounter": "0"
+        },
+        "20": {
+          "Date": "2013-02-25, 20:00:00",
+          "ReportsCounter": "0"
+        },
+        "21": {
+          "Date": "2013-02-25, 21:00:00",
+          "ReportsCounter": "0"
+        },
+        "22": {
+          "Date": "2013-02-25, 22:00:00",
+          "ReportsCounter": "0"
+        },
+        "23": {
+          "Date": "2013-02-25, 23:00:00",
+          "ReportsCounter": "0"
+        }
+      },
+      "LastMonths": {
+        "0": {
+          "Month": "2012-03",
+          "ReportsCounter": "0"
+        },
+        "1": {
+          "Month": "2012-04",
+          "ReportsCounter": "0"
+        },
+        "2": {
+          "Month": "2012-05",
+          "ReportsCounter": "6008"
+        },
+        "3": {
+          "Month": "2012-06",
+          "ReportsCounter": "647"
+        },
+        "4": {
+          "Month": "2012-07",
+          "ReportsCounter": "6689"
+        },
+        "5": {
+          "Month": "2012-08",
+          "ReportsCounter": "3131"
+        },
+        "6": {
+          "Month": "2012-09",
+          "ReportsCounter": "2368"
+        },
+        "7": {
+          "Month": "2012-10",
+          "ReportsCounter": "28152"
+        },
+        "8": {
+          "Month": "2012-11",
+          "ReportsCounter": "71987"
+        },
+        "9": {
+          "Month": "2012-12",
+          "ReportsCounter": "18"
+        },
+        "10": {
+          "Month": "2013-01",
+          "ReportsCounter": "112"
+        },
+        "11": {
+          "Month": "2013-02",
+          "ReportsCounter": "513"
+        }
+      }
+    }
+  }
+}]]></programlisting>
+
+          <caption><para>Show XML payload of REST response.</para></caption>
+          <programlisting><![CDATA[
+<Response>
+  <Statuscode>OK</Statuscode>
+  <Message>Statistics summary queried successfully.</Message>
+  <StatisticsSummary>
+    <ContentType>noiseLevels</ContentType>
+    <NowTimestamp>1361798647</NowTimestamp>
+    <SummaryData>
+      <Today>
+        <Item>
+          <Date>2013-02-25, 00:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Date>2013-02-25, 01:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Date>2013-02-25, 02:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Date>2013-02-25, 03:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Date>2013-02-25, 04:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Date>2013-02-25, 05:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Date>2013-02-25, 06:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Date>2013-02-25, 07:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Date>2013-02-25, 08:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Date>2013-02-25, 09:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Date>2013-02-25, 10:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Date>2013-02-25, 11:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Date>2013-02-25, 12:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Date>2013-02-25, 13:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Date>2013-02-25, 14:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Date>2013-02-25, 15:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Date>2013-02-25, 16:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Date>2013-02-25, 17:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Date>2013-02-25, 18:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Date>2013-02-25, 19:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Date>2013-02-25, 20:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Date>2013-02-25, 21:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Date>2013-02-25, 22:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Date>2013-02-25, 23:00:00</Date>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+      </Today>
+      <LastMonths>
+        <Item>
+          <Month>2012-03</Month>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Month>2012-04</Month>
+          <ReportsCounter>0</ReportsCounter>
+        </Item>
+        <Item>
+          <Month>2012-05</Month>
+          <ReportsCounter>6008</ReportsCounter>
+        </Item>
+        <Item>
+          <Month>2012-06</Month>
+          <ReportsCounter>647</ReportsCounter>
+        </Item>
+        <Item>
+          <Month>2012-07</Month>
+          <ReportsCounter>6689</ReportsCounter>
+        </Item>
+        <Item>
+          <Month>2012-08</Month>
+          <ReportsCounter>3131</ReportsCounter>
+        </Item>
+        <Item>
+          <Month>2012-09</Month>
+          <ReportsCounter>2368</ReportsCounter>
+        </Item>
+        <Item>
+          <Month>2012-10</Month>
+          <ReportsCounter>28152</ReportsCounter>
+        </Item>
+        <Item>
+          <Month>2012-11</Month>
+          <ReportsCounter>71987</ReportsCounter>
+        </Item>
+        <Item>
+          <Month>2012-12</Month>
+          <ReportsCounter>18</ReportsCounter>
+        </Item>
+        <Item>
+          <Month>2013-01</Month>
+          <ReportsCounter>112</ReportsCounter>
+        </Item>
+        <Item>
+          <Month>2013-02</Month>
+          <ReportsCounter>513</ReportsCounter>
+        </Item>
+      </LastMonths>
+    </SummaryData>
+  </StatisticsSummary>
+</Response>]]></programlisting>
+        </sect3>
+      </para>
+    </sect2>
   </sect1>
 
   <sect1 id="history">
     <title>Release History</title>
+
+    <sect2 id="v1.3">
+      <title>Version 1.3</title>
+
+      <para>
+        Published on 2013-02-25.
+      </para>
+
+      <itemizedlist>
+        <listitem><para>Added summary method to REST resource for use statistics.</para></listitem>
+      </itemizedlist>
+    </sect2>
 
     <sect2 id="v1.2">
       <title>Version 1.2</title>
