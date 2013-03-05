@@ -8,7 +8,7 @@ The project [Sound of the City](http://citysound.itm.uni-luebeck.de) (SotC) was 
 
 In its initial implementation, the service used SOAP for client-server-communication. [Server One](https://github.com/nepa/Server-One), the media backend of SotC, is available as open-source software on GitHub. Although the repository is outdated, it gives a good impression of the project's capabilities.
 
-With a new REST API, we are now striving to achieve better access to the publicly available data. Interested parties are invited to join the project and build their own applications based on our API. The document at hand describes the internal architecture, setup and usage of the SotC REST API. A developer's guide for the project will be available on the Sound of the City website soon.
+With a new REST API, we are now striving to achieve better access to the publicly available data. Interested parties are invited to join the project and build their own applications based on our API. The document at hand describes the internal architecture, setup and usage of the SotC REST API. A comprehensive developer's guide for the project is available on the Sound of the City website.
 
 ## Architecture
 
