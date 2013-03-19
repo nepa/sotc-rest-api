@@ -10,6 +10,8 @@ In its initial implementation, the service used SOAP for client-server-communica
 
 With a new REST API, we are now striving to achieve better access to the publicly available data. Interested parties are invited to join the project and build their own applications based on our API. The document at hand describes the internal architecture, setup and usage of the SotC REST API. A comprehensive developer's guide for the project is available on the Sound of the City website.
 
+Additionally, we provide a [Sound of the City Dashboard](https://github.com/nepa/sotc-dashboard) that serves as a monitoring tool and statistics analyzer for our media service.
+
 ## Architecture
 
 First of all, a rewrite rule in `.htaccess` will redirect all REST requests to `index.php`. The API will then create a new `Request` object and parse all parameters that are relevant to processing the request (e.g. URL path and arguments). Afterwards, the request will be passed to `handleRequest()` in the `Dispatcher` class.
@@ -54,7 +56,7 @@ Next, the dispatcher will pass the result to an **output handler**. Various impl
 
 ### Installation
 
-To install the SotC REST API, copy all files from the `src` folder to your webserver. You do **not** need to move the files to the same directory where Server-One is located. We recommend to use a folder structure like `https://api.example.com/rest/v1/`, if you want to host multiple versions of the API at the same time.
+To install the SotC REST API, copy all files from the `src` folder to your webserver. You do **not** need to move the files to the same directory where Server-One is located. We recommend to use a folder structure like `https://api.example.com/rest/v1.3/`, if you want to host multiple versions of the API at the same time.
 
 Next, open the `.htaccess` file and modify the `RewriteBase` entry such, that it points to your installation directory. Then edit `index.php` and set the PHP constant `BACKEND_LOCATION` to the path where your installation of the Server-One service backend resides. The path must be relative to your API location and must **not** have a trailing slash.
 
@@ -84,13 +86,13 @@ POST requests can also have a body, which may contain an entire JSON document. T
 
 A simple GET request might look like this:
 
-`https://api.example.com/rest/v1/noiseLevels/list/?format=json&latitude=51.58&longitude=7.6&range=10.0`
+`https://api.example.com/rest/v1.3/noiseLevels/list/?format=json&latitude=51.58&longitude=7.6&range=10.0`
 
 The HTTP header of a REST request must always set the content type to JSON, otherwise the API will return an error:
 
 `Content-Type: application/json`
 
-A more comprehensive documentation for end-users will be available on the [Sound of the City](http://citysound.itm.uni-luebeck.de) website soon.
+A more comprehensive documentation for end-users is available on the [Sound of the City](http://citysound.itm.uni-luebeck.de) website.
 
 ## History
 
